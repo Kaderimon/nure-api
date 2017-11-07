@@ -11,7 +11,7 @@ class App extends Component {
   }
 
   fetchDevices () {
-    fetch('https://cors-anywhere.herokuapp.com/cist.nure.ua/ias/app/tt/P_API_PODR_JSON', {
+    fetch('https://cors-anywhere.herokuapp.com/cist.nure.ua/ias/app/tt/get_faculties', {
       method: 'get',
       mode: 'cors'
     }).then( response => (response.json()))
