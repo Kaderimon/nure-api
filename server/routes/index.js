@@ -3,6 +3,7 @@ import fetch from 'node-fetch';
 //import product from '../models/product';
 import convert from 'koa-convert';
 import KoaBody from 'koa-body';
+import DataUpdater from '../services/dataupdater.js'
 
 const router = new Router({
   prefix: '/api'
@@ -14,8 +15,9 @@ router
     const faculties = await fetch('http://cist.nure.ua/ias/app/tt/get_faculties');
     ctx.body = await faculties.json();
   })
-  .get('/product/:id', async (ctx, next) => {
+  .get('/update', async (ctx, next) => {
     //let result = await product.get(ctx.params.id);
+    DataUpdater.run();
     if (result) {
       ctx.body = result
     } else {

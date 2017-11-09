@@ -1,5 +1,5 @@
 const config = {
-  port: 3000,
+  port: 3001,
   dbPort: 27017,
   dbAddress: 'mongodb://localhost'
 }
