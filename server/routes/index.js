@@ -3,7 +3,7 @@ import fetch from 'node-fetch';
 //import product from '../models/product';
 import convert from 'koa-convert';
 import KoaBody from 'koa-body';
-import DataUpdater from '../services/dataupdater.js'
+import { refetchData } from '../controllers/index.js'
 
 const router = new Router({
   prefix: '/api'
@@ -17,7 +17,7 @@ router
   })
   .get('/update', async (ctx, next) => {
     //let result = await product.get(ctx.params.id);
-    DataUpdater.run();
+    refetchData();
     if (result) {
       ctx.body = result
     } else {
