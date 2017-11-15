@@ -33,8 +33,9 @@ class DataUpdater {
         faculties.forEach(element => {
             directions.push(...element.directions);
         });
+        console.log(directions);
         directions.forEach(element => {
-            groupsData.push(...element.groups)
+            groupsData.push(...element.groups || [])
         })
         return groupsData;
     }
