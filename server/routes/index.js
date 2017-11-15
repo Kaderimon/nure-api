@@ -4,6 +4,7 @@ import fetch from 'node-fetch';
 import convert from 'koa-convert';
 import KoaBody from 'koa-body';
 import { refetchData } from '../controllers/index.js'
+import DataUpdater from '../services/dataupdater.js';
 
 const router = new Router({
   prefix: '/api'
@@ -12,29 +13,38 @@ const koaBody = convert(KoaBody());
 
 router
   .get('/faculties', async (ctx, next) => {
-    const faculties = await fetch('http://cist.nure.ua/ias/app/tt/get_faculties');
-    ctx.body = await faculties.json();
+    ctx.body = await DataUpdater.faculties();
+  })
+  .get('/faculties:/id', async (ctx, next) => {
+    ctx.body = await DataUpdater.faculties();
   })
   .get('/update', async (ctx, next) => {
-    //let result = await product.get(ctx.params.id);
-    refetchData();
+    let result = await refetchData();
     if (result) {
       ctx.body = result
     } else {
       ctx.status = 204
     }
   })
-  .post('/product', koaBody, async (ctx, next) => {
+  .get('/teachers', koaBody, async (ctx, next) => {
     ctx.status = 201;
-    //ctx.body = await product.create(ctx.request.body)
+    ctx.body = await DataUpdater.teachers();
   })
-  .put('/product/:id', koaBody, async (ctx, next) => {
-    ctx.status = 204;
-    //await product.update(ctx.params.id, ctx.request.body);
+  .get('/teachers/:id', koaBody, async (ctx, next) => {
+    ctx.status = 201;
+    ctx.body = await DataUpdater.teachers();
   })
-  .delete('/product/:id', async (ctx, next) => {
+  .get('/groups', koaBody, async (ctx, next) => {
+    ctx.status = 201;
+    ctx.body = await DataUpdater.groups();
+  })
+  .get('/groups/:id', koaBody, async (ctx, next) => {
+    ctx.status = 201;
+    ctx.body = await DataUpdater.groups();
+  })
+  .get('/events/:id', async (ctx, next) => {
     ctx.status = 204;
-    //await product.delete(ctx.params.id);
+    await product.delete(ctx.params.id);
   });
 
 export function routes () { return router.routes() }
