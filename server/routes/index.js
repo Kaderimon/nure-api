@@ -4,7 +4,6 @@ import fetch from 'node-fetch';
 import convert from 'koa-convert';
 import KoaBody from 'koa-body';
 import { refetchData } from '../controllers/index.js'
-import DataUpdater from '../services/dataupdater.js';
 
 const router = new Router({
   prefix: '/api'
@@ -18,8 +17,14 @@ router
   .get('/faculties:/id', async (ctx, next) => {
     ctx.body = await DataUpdater.faculties();
   })
+  .get('/departments', async (ctx, next) => {
+    ctx.body = await DataUpdater.faculties();
+  })
+  .get('/departments:/id', async (ctx, next) => {
+    ctx.body = await DataUpdater.faculties();
+  })
   .get('/update', async (ctx, next) => {
-    let result = await refetchData();
+    let result = await updateDB();
     if (result) {
       ctx.body = result
     } else {
