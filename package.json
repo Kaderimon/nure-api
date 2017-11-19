@@ -2,6 +2,7 @@
   "name": "nure-api",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:3001",
   "dependencies": {
     "font-awesome": "^4.7.0",
     "lodash": "^4.17.4",

@@ -6,20 +6,20 @@ class App extends Component {
   constructor (props) {
     super(props);
     this.state = {
-      fetched: {}
+      fetched: []
     }
   }
-
+ //https://cors-anywhere.herokuapp.com/cist.nure.ua/ias/app/tt/get_faculties
   fetchDevices () {
-    fetch('https://cors-anywhere.herokuapp.com/cist.nure.ua/ias/app/tt/get_faculties', {
-      method: 'get',
-      mode: 'cors'
-    }).then( response => (response.json()))
+    fetch('/api/groups', {
+      method: 'get'
+    })
+    .then(response => (response.json()))
     .then(data => {
       this.setState({
         fetched: data
       });
-      console.log('done',this);
+      console.log('done', data);
     });
   }
 
@@ -33,7 +33,9 @@ class App extends Component {
         <p className="App-intro">
           Thuck.
         </p>
-        {_.get(this.state.fetched, 'university.short_name', 'Kek')}
+        <ul>
+        {this.state.fetched.map(item => <li>{item.name}</li>)}
+        </ul>
       </div>
     );
   }
