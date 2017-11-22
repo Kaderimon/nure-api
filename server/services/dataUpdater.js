@@ -9,11 +9,11 @@ class DataUpdater {
         const fac = await fetch('http://cist.nure.ua/ias/app/tt/P_API_FACULTIES_JSON').then(r => r.json());
         let facultiesArray = _.get(fac, 'university.faculties', []);
         let departments = await Promise.all(
-            //facultiesArray.map(facultet => fetch(`http://cist.nure.ua/ias/app/tt/P_API_DEPARTMENTS_JSON?p_id_faculty=${facultet.id}`).then(r => r.json()))
+            facultiesArray.map(facultet => fetch(`http://cist.nure.ua/ias/app/tt/P_API_DEPARTMENTS_JSON?p_id_faculty=${facultet.id}`).then(r => r.json()).catch(e => e))
         );
-        //let directions = await Promise.all(
-        //    facultiesArray.map(facultet => fetch(`http://cist.nure.ua/ias/app/tt/P_API_DIRECTIONS_JSON?p_id_faculty=${facultet.id}`).then(r => r.json()))
-        //);
+        let directions = await Promise.all(
+            facultiesArray.map(facultet => fetch(`http://cist.nure.ua/ias/app/tt/P_API_DIRECTIONS_JSON?p_id_faculty=${facultet.id}`).then(r => r.json()))
+        );
         return departments;
     }
     static async teachers () {
