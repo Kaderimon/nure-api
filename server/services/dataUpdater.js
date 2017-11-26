@@ -1,9 +1,10 @@
 import fetch from 'node-fetch';
 import _ from "lodash";
+import { setTeachers, updateTeacher } from '../controllers/index.js'
 
 class DataUpdater {
     static async run () {
-        return await DataUpdater.faculties();
+        return await DataUpdater.teachers();
     }
     static async faculties () {
         const fac = await fetch('http://cist.nure.ua/ias/app/tt/P_API_FACULTIES_JSON').then(r => r.json());
@@ -17,7 +18,7 @@ class DataUpdater {
         return departments;
     }
     static async teachers () {
-        const teachersData = [];
+/*        const teachersData = [];
         const departments = [];
         const fac = await fetch('http://cist.nure.ua/ias/app/tt/P_API_PODR_JSON').then(r => r.json());
         let faculties = _.get(fac, 'university.faculties',[]);
@@ -28,8 +29,11 @@ class DataUpdater {
             department.teachers.forEach(teacher => {
                 teachersData.push(Object.assign({}, teacher, { "department_id": department.id }));
             })
-        })
-        return teachersData;
+        })*/
+        return updateTeacher({ id: 4544861,
+            short_name: 'Вороний М. П.',
+            full_name: 'Вороний М. П.',
+            department_id: 1337 });
     }
     static async groups () {
         const groupsData = [];

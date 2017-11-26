@@ -7,9 +7,9 @@ export async function getTeachers() {
   return await Teacher.find();
 }
 export async function setTeachers(teachers) {
-  return await Teacher.create(teachers)
-    .then(teachers => console.log(teachers));
+  return await Teacher.create(teachers);
 }
-export async function updateTeacher(id) {
-    
+export async function updateTeacher(teacher) {
+  return await Teacher.update({id: teacher.id}, teacher, {upsert: true})
+    .then(teachers => console.log(teachers));    
 }
