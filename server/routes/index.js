@@ -2,7 +2,14 @@ import Router from 'koa-router';
 import fetch from 'node-fetch';
 import convert from 'koa-convert';
 import KoaBody from 'koa-body';
-import { updateDB, getFaculties, getFacultet, getTeachers, getTeacher, getGroups } from '../controllers/index.js'
+import { updateDB,
+  getFaculties,
+  getFacultet,
+  getTeachers,
+  getTeacher,
+  getGroups,
+  teacherEvents,
+  groupEvents} from '../controllers/index.js'
 const router = new Router({
   prefix: '/api'
 });
@@ -12,14 +19,8 @@ router
   .get('/faculties', async (ctx, next) => {
     ctx.body = await getFaculties();
   })
-  .get('/faculties:/id', async (ctx, next) => {
-    ctx.body = await getFacultet();
-  })
-  .get('/departments', async (ctx, next) => {
-    ctx.body = await DataUpdater.faculties();
-  })
-  .get('/departments:/id', async (ctx, next) => {
-    ctx.body = await DataUpdater.faculties();
+  .get('/faculties/:id', async (ctx, next) => {
+    ctx.body = await getFacultet(ctx.params.id);
   })
   .get('/update', async (ctx, next) => {
     let result = await updateDB();
@@ -29,26 +30,30 @@ router
       ctx.status = 204
     }
   })
-  .get('/teachers', koaBody, async (ctx, next) => {
+  .get('/teachers', async (ctx, next) => {
     ctx.body = await getTeachers();
     ctx.status = 201;
   })
-  .get('/teachers/:id', koaBody, async (ctx, next) => {
+  .get('/teachers/:id', async (ctx, next) => {
     ctx.status = 201;
-    ctx.body = await getTeacher();
+    ctx.body = await getTeacher(ctx.params.id);
   })
-  .get('/groups', koaBody, async (ctx, next) => {
+  .post('/teachers/:id', koaBody, async (ctx, next) => {
+    ctx.status = 201;
+    ctx.body = await teacherEvents(ctx.params.id);
+  })
+  .get('/groups', async (ctx, next) => {
     ctx.status = 201;
     ctx.body = await getGroups();
   })
-  .get('/groups/:id', koaBody, async (ctx, next) => {
+  .get('/groups/:id', async (ctx, next) => {
     ctx.status = 201;
-    ctx.body = await getGroups();
+    ctx.body = await getGroups(ctx.params.id);
   })
-  .get('/events/:id', async (ctx, next) => {
-    ctx.status = 204;
-    ctx.body = await getEvent();
-  });
+  .post('/groups/:id', koaBody, async (ctx, next) => {
+    ctx.status = 201;
+    ctx.body = await groupEvents(ctx.params.id);
+  })
 
 export function routes () { return router.routes() }
 export function allowedMethods () { return router.allowedMethods() }

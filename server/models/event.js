@@ -4,7 +4,7 @@ const Schema = mangoose.Schema;
 const EventSchema = new Schema({
     id: Number,
     events:[{
-        subject_id: Number,
+        subject: {},
         start_time: Number,
         end_time: Number,
         type: Number,
@@ -15,4 +15,4 @@ const EventSchema = new Schema({
     }]
 });
 
-export default mangoose.model('Event', EventSchema);
+export default mangoose.model('EventModel', EventSchema);
