@@ -4,12 +4,13 @@ import convert from 'koa-convert';
 import KoaBody from 'koa-body';
 import { updateDB,
   getFaculties,
-  getFacultet,
+  updateFaculties,
   getTeachers,
   getTeacher,
   getGroups,
   teacherEvents,
   groupEvents} from '../controllers/index.js'
+  
 const router = new Router({
   prefix: '/api'
 });
@@ -19,8 +20,8 @@ router
   .get('/faculties', async (ctx, next) => {
     ctx.body = await getFaculties();
   })
-  .get('/faculties/:id', async (ctx, next) => {
-    ctx.body = await getFacultet(ctx.params.id);
+  .post('/faculties', async (ctx, next) => {
+    ctx.body = await updateFaculties();
   })
   .get('/update', async (ctx, next) => {
     let result = await updateDB();

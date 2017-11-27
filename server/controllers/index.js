@@ -1,9 +1,8 @@
 //work with db
 import DataUpdater from '../services/dataupdater.js';
 import { getFaculties,
-    getFacultet,
-    setFacultet,
-    updateFaculties} from './faculties'
+    updateFacultet,
+    setFacultet} from './faculties'
 import { getGroups, setGroup, updateGroup } from './groups';
 import { getTeachers, getTeacher, setTeachers } from './teachers';
 
@@ -17,10 +16,11 @@ export async function groupEvents(id) {
 export async function teacherEvents(id) {
     return await DataUpdater.events(id, 'teacher');
 }
+export async function updateFaculties() {
+    return await DataUpdater.faculties();
+}
 export { getFaculties,
-    getFacultet,
     setFacultet,
-    updateFaculties,
     getGroups,
     setGroup,
     updateGroup,

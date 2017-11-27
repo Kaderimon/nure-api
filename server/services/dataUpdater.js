@@ -16,7 +16,11 @@ class DataUpdater {
         let directions = await Promise.all(
             facultiesArray.map(facultet => fetch(`${config.apiSource}/P_API_DIRECTIONS_JSON?p_id_faculty=${facultet.id}`).then(r => r.json()))
         );
-        return departments;
+        facultiesArray.forEach((currentValue, index, array) => {
+            array[index].directions = directions[index].faculty.directions;
+            array[index].departments = _.get(departments[index], 'faculty.departments', []);
+        });
+        return facultiesArray;
     }
     static async teachers () {
         const teachersData = [];
