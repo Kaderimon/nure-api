@@ -8,8 +8,10 @@ import { updateDB,
   getTeachers,
   getTeacher,
   getGroups,
+  getGroup,
   teacherEvents,
-  groupEvents} from '../controllers/index.js'
+  groupEvents,
+  getEvent} from '../controllers/index.js'
   
 const router = new Router({
   prefix: '/api'
@@ -25,11 +27,8 @@ router
   })
   .get('/update', async (ctx, next) => {
     let result = await updateDB();
-    if (result) {
-      ctx.body = result
-    } else {
-      ctx.status = 204
-    }
+    ctx.body = result
+    ctx.status = 201;
   })
   .get('/teachers', async (ctx, next) => {
     ctx.body = await getTeachers();
@@ -49,12 +48,15 @@ router
   })
   .get('/groups/:id', async (ctx, next) => {
     ctx.status = 201;
-    ctx.body = await getGroups(ctx.params.id);
+    ctx.body = await getGroup(ctx.params.id);
   })
   .post('/groups/:id', koaBody, async (ctx, next) => {
     ctx.status = 201;
     ctx.body = await groupEvents(ctx.params.id);
   })
-
+  .get('/events/:id', async (ctx, next) => {
+    ctx.status = 201;
+    ctx.body = await getEvent(ctx.params.id);
+  })
 export function routes () { return router.routes() }
 export function allowedMethods () { return router.allowedMethods() }

@@ -8,5 +8,4 @@ export async function setFacultet(data) {
 }
 export async function updateFacultet(target) {
   return await Facultet.update({id: target.id}, target, {upsert: true})
-  .then(target => console.log(target));    
 }

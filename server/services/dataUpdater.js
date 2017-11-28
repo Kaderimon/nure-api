@@ -1,11 +1,16 @@
 import fetch from 'node-fetch';
 import _ from "lodash";
-import { setTeachers, updateTeacher } from '../controllers/index.js'
+import { setTeachers, updateTeacher, updateGroup, updateFacultet, updateEvent } from '../controllers/index.js'
 import config from '../config/config'
 
 class DataUpdater {
     static async run () {
-        return await DataUpdater.teachers();
+        const teachers = await DataUpdater.teachers();
+        const groups = await DataUpdater.groups();
+        const faculties = await DataUpdater.faculties();
+        return {
+            message: 'YEAH BOIII'
+        }
     }
     static async faculties () {
         const data = await fetch(`${config.apiSource}/P_API_FACULTIES_JSON`).then(r => r.json());
@@ -20,7 +25,9 @@ class DataUpdater {
             array[index].directions = directions[index].faculty.directions;
             array[index].departments = _.get(departments[index], 'faculty.departments', []);
         });
-        return facultiesArray;
+        return  facultiesArray.map(async item => {
+            return await updateFacultet(item);
+        });
     }
     static async teachers () {
         const teachersData = [];
@@ -54,8 +61,8 @@ class DataUpdater {
             arr[index].subject = subject;
             delete arr[index].subject_id;
         });
-
-        return { id, events };
+        const eventData = { id, events };
+        return updateEvent(eventData);
     }
     static async groups () {
         const groupsData = [];
@@ -75,7 +82,9 @@ class DataUpdater {
                 })
             });
         })
-        return groupsData;
+        return groupsData.map(async item => {
+            return await updateGroup(item);
+        });
     }
 }
 

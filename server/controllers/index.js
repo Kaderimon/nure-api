@@ -3,12 +3,12 @@ import DataUpdater from '../services/dataupdater.js';
 import { getFaculties,
     updateFacultet,
     setFacultet} from './faculties'
-import { getGroups, setGroup, updateGroup } from './groups';
-import { getTeachers, getTeacher, setTeachers } from './teachers';
-
+import { getGroups, getGroup, setGroup, updateGroup } from './groups';
+import { getTeachers, getTeacher, setTeachers, updateTeacher } from './teachers';
+import { updateEvent, getEvent } from './events';
 
 export async function updateDB() {
-    await DataUpdater.run();
+    return await DataUpdater.run();
 }
 export async function groupEvents(id) {
     return await DataUpdater.events(id, 'group');
@@ -21,9 +21,14 @@ export async function updateFaculties() {
 }
 export { getFaculties,
     setFacultet,
+    updateFacultet,
     getGroups,
+    getGroup,
     setGroup,
     updateGroup,
     getTeachers,
     getTeacher,
-    setTeachers };
+    setTeachers,
+    updateTeacher,
+    updateEvent,
+    getEvent };
