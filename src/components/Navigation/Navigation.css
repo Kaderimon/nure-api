@@ -1,0 +1,15 @@
+.App-nav {
+    background-color: #222;
+    height: 100%;
+    left:0;
+    position: fixed;
+    top: 60px;
+    width: 150px;
+}
+.App-nav__item {
+    padding: 20px;
+    border-bottom: 1px solid dodgerblue;
+}
+.App-nav__item:hover {
+    opacity: 0.5;
+}

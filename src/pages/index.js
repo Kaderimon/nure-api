@@ -9,22 +9,8 @@ class App extends Component {
       fetched: []
     }
   }
- //https://cors-anywhere.herokuapp.com/cist.nure.ua/ias/app/tt/get_faculties
-  fetchDevices () {
-    fetch('/api/groups', {
-      method: 'get'
-    })
-    .then(response => (response.json()))
-    .then(data => {
-      this.setState({
-        fetched: data
-      });
-      console.log('done', data);
-    });
-  }
 
   componentDidMount () {
-    this.fetchDevices();
   }
 
   render() {

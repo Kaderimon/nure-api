@@ -22,9 +22,7 @@ class Main extends Component {
     return (
       <div className="App">
         <Header showNav={this.state.showNav} handleNavigation={this.handleNavigation}/>
-        {this.state.showNav && <Col md={3}>
-          <Nav />
-        </Col>}
+        {this.state.showNav && <Nav />}
         <Grid fluid={true}>
             {this.props.children}
         </Grid>
