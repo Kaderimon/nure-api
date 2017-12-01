@@ -7,8 +7,9 @@
     width: 150px;
 }
 .App-nav__item {
-    padding: 20px;
     border-bottom: 1px solid dodgerblue;
+    cursor: pointer;
+    padding: 20px;
 }
 .App-nav__item:hover {
     opacity: 0.5;

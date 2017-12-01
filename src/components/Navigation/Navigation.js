@@ -7,10 +7,9 @@ class Nav extends Component {
     return (
       <nav className="App-nav">
           <ul>
-            <li className="App-nav__item"><NavLink to='/'>Home</NavLink></li>
-            <li className="App-nav__item"><NavLink to='/students'>Students</NavLink></li>
-            <li className="App-nav__item"><NavLink to='/teachers'>Teachers</NavLink></li>
-            <li className="App-nav__item"><NavLink to='/groups'>Groups</NavLink></li>
+            <li className="App-nav__item"><NavLink to='/'>Главная</NavLink></li>
+            <li className="App-nav__item"><NavLink to='/teachers'>Преподаватель</NavLink></li>
+            <li className="App-nav__item"><NavLink to='/groups'>Студент</NavLink></li>
           </ul>
       </nav>
     );

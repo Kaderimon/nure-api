@@ -7,7 +7,7 @@ class Header extends Component {
     return (
       <header className="App-header">
         <i onClick={this.props.handleNavigation} className={`fa ${this.getNavClass()} fa-fw`}></i>
-        <h1 className="App-title">Welcome to NureAPI</h1>
+        <h1 className="App-title">NureAPI - Добро Пожаловать</h1>
         <i className="fa fa-refresh fa-fw"></i>
       </header>
     );
