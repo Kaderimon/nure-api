@@ -5,9 +5,9 @@ import { daysOfWeek } from '../../../config/constants'
 class Header extends PureComponent {
     render () {
         return (
-            <Col md={8} mdOffset={4}>
+            <Col md={11} mdOffset={1} style={{display: 'flex'}}>
                 { daysOfWeek.map( item => 
-                    <span>{item}</span>
+                    <div className="col-md-2">{item}</div>
                 )}
             </Col>
         );
