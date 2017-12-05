@@ -23,9 +23,7 @@ class Main extends Component {
       <div className="App">
         <Header showNav={this.state.showNav} handleNavigation={this.handleNavigation}/>
         {this.state.showNav && <Nav />}
-        <Grid fluid={true}>
-            {this.props.children}
-        </Grid>
+        {this.props.children}
         <footer className="App-footer">
           <p className="App-copy">Hey yooo</p>
         </footer>

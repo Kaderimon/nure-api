@@ -5,6 +5,7 @@
     position: fixed;
     top: 60px;
     width: 150px;
+    z-index: 1;
 }
 .App-nav__item {
     border-bottom: 1px solid dodgerblue;

@@ -1,0 +1,17 @@
+.calendar{
+  padding: 20px;
+}
+.c-control { 
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 30px;
+}
+.c-control__info {
+  color: black;
+}
+.c-table {
+  margin-right: 0;
+  margin-left: 0;
+  border: 1px solid violet;
+}

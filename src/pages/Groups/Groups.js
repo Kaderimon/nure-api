@@ -4,9 +4,7 @@ import Calendar from '../../components/Calendar/calendar'
 class Groups extends Component {
   render () {
     return (
-      <div>
         <Calendar />
-      </div>
     );
   }
 }
