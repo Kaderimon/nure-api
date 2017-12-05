@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import './Home.css';
 import _ from 'lodash'
 
 class App extends Component {

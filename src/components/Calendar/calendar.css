@@ -1,11 +1,15 @@
 .calendar{
-  padding: 20px;
+  width: 75%;
+  border: 1px solid;
+  margin: 0 auto;
+  border-radius: 5px;
 }
 .c-control { 
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
-  margin-bottom: 30px;
+  margin: 10px 20px;
+  padding: 0 20px;
 }
 .c-control__info {
   color: black;
@@ -13,5 +17,6 @@
 .c-table {
   margin-right: 0;
   margin-left: 0;
-  border: 1px solid violet;
+  border-top: 1px solid;
+  padding-top: 10px;
 }

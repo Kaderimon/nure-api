@@ -33,7 +33,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  color: orange;
+  color: #890377;
 }
 ol, ul {
 	list-style: none;
@@ -58,3 +58,41 @@ a:hover {
 	color: inherit;
 	text-decoration: none;
 }
+
+.App {
+	background-color: #f2f2f2;
+	height: 100vh;
+	text-align: center;
+  }
+  
+  .App-header {
+	background-color: #222;
+	color: yellow;
+	display: flex;
+	height: 68px;
+	justify-content: space-between;
+	padding: 23px;
+  }
+  
+  .App-title {
+	font-size: 1.5em;
+	margin: 30px;
+	text-align: left;
+  }
+  
+  .App-main{
+	min-height: 90vh;
+	padding: 20px;
+  }
+  
+  .App-intro {
+	font-size: large;
+  }
+  
+  .App-footer {
+	background-color: #222;
+	height: 30px;
+	text-align: right;
+	padding: 8px;
+  }
+  
