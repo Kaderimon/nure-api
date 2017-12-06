@@ -1,3 +1,4 @@
-.calendar .col-xs-2{
-  width: 14%;
+.c-header{
+  display: flex;
+  justify-content: space-between;
 }

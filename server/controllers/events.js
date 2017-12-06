@@ -1,7 +1,7 @@
 import EventModel from '../models/event';
 
 export async function getEvent(id) {
-  return await EventModel.find({id: id});
+  return await EventModel.findOne({id: id});
 }
 export async function setEvent(data) {
   return await EventModel.create(data);

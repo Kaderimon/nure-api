@@ -5,9 +5,10 @@ import './header.css';
 class Header extends PureComponent {
     render () {
         return (
-            <Col xs={11} xsOffset={1}>
+            <Col xs={12} className="c-header">
+                <Col xs={1}></Col>
                 { daysOfWeek.map( item => 
-                    <div className="col-xs-2">{item}</div>
+                    <Col xs={1}>{item}</Col>
                 )}
             </Col>
         );

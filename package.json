@@ -6,6 +6,7 @@
   "dependencies": {
     "font-awesome": "^4.7.0",
     "lodash": "^4.17.4",
+    "moment": "^2.19.3",
     "react": "^16.0.0",
     "react-bootstrap": "^0.31.3",
     "react-dom": "^16.0.0",

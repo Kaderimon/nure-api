@@ -25,7 +25,7 @@ class Main extends Component {
         {this.state.showNav && <Nav />}
         {this.props.children}
         <footer className="App-footer">
-          <p className="App-copy">Shupyliuk M. ^_^ Roslyakov I. O_o Usachev V. d-_-b</p>
+          <p className="App-copy">Shupyliuk M. && Roslyakov I. && Usachev V.</p>
         </footer>
       </div>
     );
