@@ -6,6 +6,7 @@ import './Schedule.css'
 
 class Sidebar extends PureComponent {
     render () {
+      const { data } = this.props
       return (
         <Col xs={12}>
           { workHours.map( lessons => 
@@ -13,9 +14,9 @@ class Sidebar extends PureComponent {
               <Col xs={1}>
                 {lessons.map(couple => <div>{couple}</div>)}
               </Col>
-              {daysOfWeek.map(couple => 
+              {data.map(day => 
                 <Col xs={1} style={{}}>
-                  {couple}
+                  {day}
                 </Col>
               )}
             </Col>

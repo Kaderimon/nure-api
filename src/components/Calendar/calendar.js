@@ -11,26 +11,29 @@ class Calendar extends Component {
     super(props);
     this.state = {
       data: [],
-      currentWeek: moment()
+      currentWeek: moment().week(),
+      weekRange: ""
     }
   }
   componentDidMount() {
-    this.setState({
-      currentWeek: moment()
-    })
+    this.currentWeek();
   }
   nextWeek = (e) => {
-    const week = this.state.currentWeek.add(1,"weeks");
+    this.state.currentWeek++;
+    this.state.weekRange = `${moment().week(this.state.currentWeek).day(1).format('D MMMM')}-${moment().week(this.state.currentWeek).day(7).format('D MMMM')}`;
     this.setState(this.state);
   }
   previousWeek = (e) => {
-    this.state.currentWeek.subtract(1,"weeks");
+    this.state.currentWeek--;
+    this.state.weekRange = `${moment().week(this.state.currentWeek).day(1).format('D MMMM')}-${moment().week(this.state.currentWeek).day(7).format('D MMMM')}`;
     this.setState(this.state);
   }
   currentWeek = (e) => {
-    const currentWeek = moment();
+    const currentWeek = moment().week();
+    const weekRange = `${moment().week(currentWeek).day(1).format('D MMMM')}-${moment().week(currentWeek).day(7).format('D MMMM')}`;
     this.setState({
-      currentWeek: currentWeek
+      currentWeek: currentWeek,
+      weekRange: weekRange
     });
   }
 
@@ -44,14 +47,14 @@ class Calendar extends Component {
             <Button onClick={this.nextWeek}><i className="fa fa-arrow-right fa-fw"></i></Button>
           </ButtonGroup>
           <div className="c-control__info">
-            {this.state.currentWeek.format("D, MMMM")}
+            {this.state.weekRange.toString()}
           </div>
         </div>
         <div className="c-table row">
           <div className="col-xs-12">        
             <Header />
           </div>
-          <Sidebar />
+          <Sidebar data={this.state.data}/>
         </div>
       </div>
     );
