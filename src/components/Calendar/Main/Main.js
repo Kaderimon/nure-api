@@ -2,22 +2,24 @@ import React, { Component } from 'react';
 import _ from 'lodash';
 import moment from 'moment';
 import { Col } from 'react-bootstrap';
-import { workHours } from '../../../config/constants';
-import { daysOfWeek } from '../../../config/constants'
-import './Main.css'
+import { workHours, daysOfWeek, lessonColor } from '../../../config/constants';
+import './Main.css';
 
 class Main extends Component {
   renderLessons(data, i) {
-    return daysOfWeek.map( (day,dayNumber) => 
-      <Col xs={1} style={{}}>
-        {data.map(lesson => {
-          const lessonDay = moment(1970).seconds(lesson.start_time).day();
-          if(lessonDay === dayNumber+1 && lesson.number_pair === i+1){
-            return _.get(lesson, 'auditory', '???');            
-          }
-        })}
+    return daysOfWeek.map( (day,dayNumber) => {
+      let lessonColorToSet = "";
+      const lesson = data.map(lesson => {
+        const lessonDay = moment(1970).seconds(lesson.start_time).day();
+        if(lessonDay === dayNumber+1 && lesson.number_pair === i+1){
+          lessonColorToSet = lessonColor[_.get(lesson, "type.id_base", "default")];
+          return _.get(lesson, "subject.brief", "???");            
+        }
+      })
+      return <Col xs={1} className="lesson" style={{backgroundColor: lessonColorToSet}}>
+        {lesson}
       </Col>
-    )
+    })
   }
   render () {
     const { data } = this.props
@@ -25,7 +27,7 @@ class Main extends Component {
       <Col xs={12}>
         { workHours.map( (time, i) => 
           <Col xs={12} className="schedule">
-            <Col xs={1}>
+            <Col xs={1} className="timeRange lesson">
               {time.map(range => <div>{range}</div>)}
             </Col>
             {this.renderLessons(data, i)}

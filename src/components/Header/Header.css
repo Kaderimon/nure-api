@@ -1,0 +1,12 @@
+.App-header {
+	background-color: #222;
+	border-bottom: 1px solid dodgerblue;
+	color: purple;
+	display: flex;
+	height: 67px;
+	justify-content: space-between;
+	padding: 23px;
+	position: fixed;
+	top: 0;
+	width: 100%;
+}

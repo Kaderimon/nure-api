@@ -1,6 +1,18 @@
 .schedule {
+    border-bottom: 1px solid dodgerblue; 
     min-height: 41px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+.lesson {
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.timeRange {
+    background-color: inherit;
+    flex-direction: column;
+    justify-content: space-around;
 }

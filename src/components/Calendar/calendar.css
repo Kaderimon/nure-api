@@ -1,8 +1,14 @@
 .calendar{
   width: 75%;
-  border: 1px solid;
+  border: 1px solid dodgerblue;
+  background: #000000e3;
   margin: 0 auto;
   border-radius: 5px;
+}
+.calendar .btn-default {
+  color: #fff;
+  background-color: #0000;
+  border-color: dodgerblue;
 }
 .calendar div {
   padding-right: 0;
@@ -21,7 +27,7 @@
 .c-table {
   margin-right: 0;
   margin-left: 0;
-  border-top: 1px solid;
+  border-top: 1px solid dodgerblue;
   padding-top: 10px;
   padding-bottom: 10px;
 }
