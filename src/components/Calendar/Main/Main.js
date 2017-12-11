@@ -12,7 +12,7 @@ class Main extends Component {
       <Col xs={1} style={{}}>
         {data.map(lesson => {
           const lessonDay = moment(1970).seconds(lesson.start_time).day();
-          if(lessonDay === dayNumber && lesson.number_pair === i+1){
+          if(lessonDay === dayNumber+1 && lesson.number_pair === i+1){
             return _.get(lesson, 'auditory', '???');            
           }
         })}

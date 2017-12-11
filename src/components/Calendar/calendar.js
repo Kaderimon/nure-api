@@ -20,12 +20,12 @@ class Calendar extends Component {
   }
   nextWeek = (e) => {
     this.state.currentWeek++;
-    this.state.weekRange = `${moment().week(this.state.currentWeek).day(1).format('D MMMM')}-${moment().week(this.state.currentWeek).day(7).format('D MMMM')}`;
+    this.state.weekRange = `${moment().week(this.state.currentWeek).day(1).format('D MMMM')} - ${moment().week(this.state.currentWeek).day(7).format('D MMMM')}`;
     this.setState(this.state);
   }
   previousWeek = (e) => {
     this.state.currentWeek--;
-    this.state.weekRange = `${moment().week(this.state.currentWeek).day(1).format('D MMMM')}-${moment().week(this.state.currentWeek).day(7).format('D MMMM')}`;
+    this.state.weekRange = `${moment().week(this.state.currentWeek).day(1).format('D MMMM')} - ${moment().week(this.state.currentWeek).day(7).format('D MMMM')}`;
     this.setState(this.state);
   }
   currentWeek = (e) => {
