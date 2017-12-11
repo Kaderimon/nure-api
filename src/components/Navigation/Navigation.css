@@ -1,9 +1,8 @@
 .App-nav {
     background-color: #222;
-    height: 100%;
+    height: calc(100% -68px);
     left:0;
     position: fixed;
-    top: 60px;
     width: 150px;
     z-index: 1;
 }

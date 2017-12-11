@@ -24,12 +24,12 @@ class Main extends Component {
         <Header showNav={this.state.showNav} handleNavigation={this.handleNavigation}/>
         {this.state.showNav && <Nav />}
         {this.props.children}
-        <footer className="App-footer">
-          <p className="App-copy">Shupyliuk M. && Roslyakov I. && Usachev V.</p>
-        </footer>
       </div>
     );
   }
 }
 
 export default Main;
+        //<footer className="App-footer">
+        //  <p className="App-copy">Shupyliuk M. && Roslyakov I. && Usachev V.</p>
+        //</footer>

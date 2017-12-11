@@ -61,38 +61,41 @@ a:hover {
 
 .App {
 	background-color: #f2f2f2;
-	height: 100vh;
 	text-align: center;
-  }
+}
   
-  .App-header {
+.App-header {
 	background-color: #222;
 	color: yellow;
 	display: flex;
 	height: 68px;
 	justify-content: space-between;
 	padding: 23px;
-  }
+	position: fixed;
+	top: 0;
+	width: 100%;
+}
   
-  .App-title {
+.App-title {
 	font-size: 1.5em;
 	margin: 30px;
 	text-align: left;
-  }
+}
   
-  .App-main{
+.App-main{
+	margin-top: 68px;
 	min-height: 90vh;
 	padding: 20px;
-  }
+}
   
-  .App-intro {
+.App-intro {
 	font-size: large;
-  }
+}
   
-  .App-footer {
+.App-footer {
 	background-color: #222;
 	height: 30px;
 	text-align: right;
 	padding: 8px;
-  }
+}
   

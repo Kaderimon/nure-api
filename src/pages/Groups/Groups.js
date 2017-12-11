@@ -12,7 +12,7 @@ class Groups extends Component {
     this.fetchEvents();
   }
   async fetchEvents () {
-    const data = await fetch("/api/events/4801938").then(r => r.json());
+    const data = await fetch("/api/events/5343992").then(r => r.json());
     this.setState({data: data.events});
   }
   render () {

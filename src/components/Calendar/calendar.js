@@ -3,7 +3,7 @@ import { Col, Row, Button, ButtonGroup } from 'react-bootstrap';
 import moment from 'moment';
 import Header from './Header/Header';
 import Main from './Main/Main';
-import Sidebar from './Sidebar/Sidebar';
+
 import './calendar.css';
 
 class Calendar extends Component {
@@ -36,7 +36,13 @@ class Calendar extends Component {
       weekRange: weekRange
     });
   }
-
+  filterByDate = (events) => {
+    return events.filter(event => {
+      const time = moment(1970).seconds(event.start_time);
+      const currentWeek = moment().week(this.state.currentWeek)
+      return time.isSame(currentWeek, 'week') 
+    });
+  }
   render () {
     return (
       <div className="calendar">
@@ -54,7 +60,7 @@ class Calendar extends Component {
           <div className="col-xs-12">        
             <Header />
           </div>
-          <Sidebar data={this.state.data}/>
+          <Main data={this.filterByDate(this.props.data)}/>
         </div>
       </div>
     );
