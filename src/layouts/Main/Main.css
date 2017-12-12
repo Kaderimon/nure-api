@@ -1,0 +1,30 @@
+.App {
+	background: url("../../bg.jpg");
+	background-attachment: scroll;
+	background-repeat: no-repeat;
+	background-size: cover;
+	text-align: center;
+}
+  
+.App-title {
+	font-size: 1.5em;
+	margin: 30px;
+	text-align: left;
+}
+  
+.App-main{
+	margin-top: 67px;
+	min-height: calc(100vh - 67px);
+	padding: 20px;
+}
+  
+.App-intro {
+	font-size: large;
+}
+  
+.App-footer {
+	background-color: #222;
+	height: 30px;
+	text-align: right;
+	padding: 8px;
+}

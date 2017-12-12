@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Grid, Col, Row } from 'react-bootstrap';
 import Nav from '../../components/Navigation/Navigation'
 import Header from '../../components/Header/Header'
+import './Main.css'
 
 class Main extends Component {
   constructor(props) {
