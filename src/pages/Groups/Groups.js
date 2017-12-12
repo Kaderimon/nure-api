@@ -17,7 +17,7 @@ class Groups extends Component {
   }
   render () {
     return (
-      <div className="App-main">
+      <div className="groups">
         <h1 className="App-title">Расписание для групп</h1>
         <Calendar data={this.state.data}/>
       </div>

@@ -75,7 +75,7 @@ a:hover {
   
 .App-main{
 	margin-top: 67px;
-	min-height: 91vh;
+	min-height: calc(100vh - 67px);
 	padding: 20px;
 }
   

@@ -23,7 +23,10 @@ class Main extends Component {
       <div className="App">
         <Header showNav={this.state.showNav} handleNavigation={this.handleNavigation}/>
         {this.state.showNav && <Nav />}
-        {this.props.children}
+        <div className="App-main">
+          {this.props.children}
+        </div>
+
       </div>
     );
   }

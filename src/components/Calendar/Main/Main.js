@@ -13,7 +13,13 @@ class Main extends Component {
         const lessonDay = moment(1970).seconds(lesson.start_time).day();
         if(lessonDay === dayNumber+1 && lesson.number_pair === i+1){
           lessonColorToSet = lessonColor[_.get(lesson, "type.id_base", "default")];
-          return _.get(lesson, "subject.brief", "???");            
+          return <div>
+            {_.get(lesson, "subject.brief", "???")}
+            <div style={{fontSize: "smaller", marginTop:"5px"}}>
+              <span>{_.get(lesson, "type.short_name", "???")} </span>
+              <span>{_.get(lesson, "auditory", "???")}</span>
+            </div>
+          </div>
         }
       })
       return <Col xs={1} className="lesson" style={{backgroundColor: lessonColorToSet}}>
