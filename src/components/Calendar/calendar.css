@@ -1,13 +1,13 @@
 .calendar{
   width: 75%;
   border: 1px solid dodgerblue;
-  background: #000000e3;
+  background: rgba(0, 0, 0, .8);
   margin: 0 auto;
   border-radius: 5px;
 }
 .calendar .btn-default {
   color: #fff;
-  background-color: #0000;
+  background-color: #000;
   border-color: dodgerblue;
 }
 .calendar div {

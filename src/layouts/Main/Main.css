@@ -1,6 +1,6 @@
 .App {
-	background: url("../../bg.jpg");
-	background-attachment: scroll;
+	background: url("../../bg.jpg") white;
+	background-attachment: fixed;
 	background-repeat: no-repeat;
 	background-size: cover;
 	text-align: center;

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import Calendar from '../../components/Calendar/calendar'
+import Calendar from '../../components/Calendar/calendar';
+import Transport from '../../core/Requester';
 
 class Groups extends Component {
   constructor (props) {
@@ -12,8 +13,8 @@ class Groups extends Component {
     this.fetchEvents();
   }
   async fetchEvents () {
-    const data = await Transport.get("/api/events/4801938");
-    this.setState({data: data.events});
+    const { response } = await Transport.get("/api/events/4801938");
+    this.setState({data: response.events});
   }
   render () {
     return (
