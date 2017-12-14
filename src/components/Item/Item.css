@@ -1,0 +1,13 @@
+.items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.item {
+  border: 1px solid dodgerblue;
+  color: #fff;
+  background: #000000c2;
+  margin: 5px;
+  padding: 5px;
+  cursor: pointer;
+}

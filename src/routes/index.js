@@ -4,6 +4,7 @@ import Main from '../layouts/Main/Main.js'
 import Index from '../pages/Home/Home'
 import Groups from '../pages/Groups/Groups'
 import Teachers from '../pages/Teachers/Teachers'
+import Events from '../pages/Events/Events'
 import NotFound from '../pages/NotFound/404'
 
 const App = () => (
@@ -13,8 +14,8 @@ const App = () => (
                 <Route exact path="/" component={Index}/>
                 <Route exact path="/groups" component={Groups}/>
                 <Route exact path="/teachers" component={Teachers}/>
-                <Route exact path="/groups/:id" component={Groups}/>
-                <Route exact path="/teachers/:id" component={Teachers}/>
+                <Route exact path="/groups/:id" component={Events}/>
+                <Route exact path="/teachers/:id" component={Events}/>
                 <Route path="/" component={NotFound}/>
             </Switch>
         </Main>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
 import Transport from '../../core/Requester';
-import TeachersList from '../../components/TeachersList/TeachersList';
+import Item from '../../components/Item/Item';
 
 class Teachers extends Component {
   constructor (props) {
@@ -20,7 +21,11 @@ class Teachers extends Component {
     return (
       <div className="teachers">
         <h1 className="App-title">Расписание преподователей</h1>
-        <TeachersList teachers={this.state.teachers} />
+        <div className="items">
+          {this.state.teachers.map(teacher => <NavLink to={`/teachers/${teacher.id}`}>
+              <Item onClick={()=>console.log('11')}data={teacher}/>
+            </NavLink>)}
+        </div>
       </div>
     );
   }
