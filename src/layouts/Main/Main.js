@@ -13,6 +13,10 @@ class Main extends Component {
     }
   }
 
+  componentDidMount() {
+    
+  }
+
   handleNavigation = (e) => {
     this.setState({
       showNav: !this.state.showNav
@@ -27,7 +31,6 @@ class Main extends Component {
         <div className="App-main">
           {this.props.children}
         </div>
-
       </div>
     );
   }

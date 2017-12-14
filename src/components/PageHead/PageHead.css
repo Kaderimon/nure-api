@@ -1,0 +1,11 @@
+.teachers .page-header,
+.groups .page-header{
+    display: flex;
+    margin: 0;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 9px;
+    border-bottom: 1px solid #eee;
+    padding: 20px;
+    margin-bottom: 9px;
+}
