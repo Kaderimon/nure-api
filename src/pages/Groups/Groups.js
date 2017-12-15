@@ -4,6 +4,7 @@ import Item from '../../components/Item/Item';
 import Transport from '../../core/Requester';
 import PageHead from '../../components/PageHead/PageHead';
 import _ from 'lodash';
+import core from '../../core/core';
 
 class Groups extends Component {
   constructor (props) {
@@ -14,6 +15,7 @@ class Groups extends Component {
     }
   }
   componentDidMount() {
+    core.saveLocal('event', {type: 'groups'});
     this.fetchGroups();
   }
   async fetchGroups () {
@@ -39,7 +41,11 @@ class Groups extends Component {
       <div className="groups">
         <PageHead title="Группы" onChange={this.search} />
         <div className="items">
-          {this.state.search.length > 0 ? this.state.search.map(group => <NavLink to={`/groups/${group.id}`}>
+          {this.state.search.length > 0 ? this.state.search.map(group => <NavLink onClick={e => {
+            e.preventDefault();
+            core.saveLocal('event', {id:group.id, name: group.name, type:'groups'}, true);
+            this.props.history.push(`/groups/${group.id}`);
+          }} to={`/groups/${group.id}`}>
               <Item data={group}/>
             </NavLink>) : 'No data'}
         </div>

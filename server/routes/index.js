@@ -34,6 +34,10 @@ router
     ctx.body = await getTeachers();
     ctx.status = 201;
   })
+  .post('/teachers', async (ctx, next) => {
+    ctx.body = await getTeachers();
+    ctx.status = 201;
+  })
   .get('/teachers/:id', async (ctx, next) => {
     ctx.status = 201;
     ctx.body = await getTeacher(ctx.params.id);
@@ -43,6 +47,10 @@ router
     ctx.body = await teacherEvents(ctx.params.id);
   })
   .get('/groups', async (ctx, next) => {
+    ctx.status = 201;
+    ctx.body = await getGroups();
+  })
+  .post('/groups', async (ctx, next) => {
     ctx.status = 201;
     ctx.body = await getGroups();
   })

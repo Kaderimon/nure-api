@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import Transport from '../../core/Requester';
+import core from '../../core/core';
 import Item from '../../components/Item/Item';
 import PageHead from '../../components/PageHead/PageHead';
 import _ from 'lodash';
@@ -40,7 +41,11 @@ class Teachers extends Component {
       <div className="teachers">
         <PageHead title="Преподаватели" onChange={this.search} />
         <div className="items">
-          {this.state.search.length > 0 ? this.state.search.map(teacher => <NavLink to={`/teachers/${teacher.id}`}>
+          {this.state.search.length > 0 ? this.state.search.map(teacher => <NavLink onClick={e => {
+            e.preventDefault();
+            core.saveLocal('event', {id:teacher.id, name: teacher.short_name, type:'teacher'}, true);
+            this.props.history.push(`/teachers/${teacher.id}`);
+          }} to={`/teachers/${teacher.id}`}>
               <Item data={teacher}/>
             </NavLink>) : 'No Data'}
         </div>

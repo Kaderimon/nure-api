@@ -5,7 +5,7 @@ export async function getGroups() {
 }
 
 export async function getGroup(groupId) {
-  return await Group.find({id: groupId});
+  return await Group.findOne({id: groupId});
 }
 export async function setGroup(groups) {
   return await Group.create(groups);

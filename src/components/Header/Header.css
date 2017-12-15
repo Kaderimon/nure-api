@@ -11,3 +11,8 @@
 	width: 100%;
 	z-index: 1;
 }
+.sync {
+	color: white;
+    font-size: 12px;
+    margin-top: 10px;
+}

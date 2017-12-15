@@ -2,6 +2,7 @@ import fetch from 'node-fetch';
 import _ from "lodash";
 import { setTeachers, updateTeacher, updateGroup, updateFacultet, updateEvent } from '../controllers/index.js'
 import config from '../config/config'
+import moment from 'moment';
 
 class DataUpdater {
     static async run () {
@@ -61,7 +62,7 @@ class DataUpdater {
             arr[index].subject = subject;
             delete arr[index].subject_id;
         });
-        const eventData = { id, events };
+        const eventData = { id, events, sync: moment().format('llll')};
         return updateEvent(eventData);
     }
     static async groups () {

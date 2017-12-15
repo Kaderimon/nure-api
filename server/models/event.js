@@ -3,7 +3,8 @@ const Schema = mangoose.Schema;
 
 const EventSchema = new Schema({
     id: Number,
-    events:[]
+    events:[],
+    sync: String
 });
 
 export default mangoose.model('EventModel', EventSchema);

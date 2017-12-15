@@ -1,7 +1,7 @@
 import Teacher from '../models/teacher';
 
 export async function getTeacher(id) {
-  return await Teacher.find({id: id});
+  return await Teacher.findOne({id: id});
 }
 export async function getTeachers() {
   return await Teacher.find();
