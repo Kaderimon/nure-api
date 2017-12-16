@@ -7,8 +7,8 @@ import { getGroups, getGroup, setGroup, updateGroup } from './groups';
 import { getTeachers, getTeacher, setTeachers, updateTeacher } from './teachers';
 import { updateEvent, getEvent } from './events';
 
-export async function updateDB() {
-    return await DataUpdater.run();
+export function updateDB() {
+    DataUpdater.run();
 }
 export async function groupEvents(id) {
     return await DataUpdater.events(id, 'group');
@@ -18,6 +18,12 @@ export async function teacherEvents(id) {
 }
 export async function updateFaculties() {
     return await DataUpdater.faculties();
+}
+export async function updateGroups() {
+    return await DataUpdater.groups();
+}
+export async function updateTeachers() {
+    return await DataUpdater.teachers();
 }
 export { getFaculties,
     setFacultet,

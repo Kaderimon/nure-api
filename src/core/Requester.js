@@ -1,17 +1,15 @@
-function customError (response) {
-  this.name = response.status;
-  this.message = response.statusText;
-  this.stack = (new Error()).stack;
-}
+import Notify from "./Notify";
+import _ from "lodash";
 
-customError.prototype = Object.create(Error.prototype);
-customError.prototype.constructor = customError;
-
-function handleErrors (response) {
+async function handleErrors (response) {
+  const res = await response.json();
   if (!response.ok) {
-    throw new customError(response);
+    Notify.error(res.message);
+    throw new Error(res.message);
+  } else {
+
+    return res;    
   }
-  return response.json();
 }
 
 export default class Transport {
@@ -20,8 +18,8 @@ export default class Transport {
       method: 'get',
       credentials: 'include'
     }).then(handleErrors)
-    .then((response) => ({ response }))
-    .catch(error => ({ error }));
+    .then(response => response)
+    .catch(error => { console.log(error) });
   }
   static post (uri, body) {
     return fetch(uri, {
@@ -33,8 +31,8 @@ export default class Transport {
       },
       body
     }).then(handleErrors)
-    .then((response) => ({ response }))
-    .catch(error => ({ error }));
+    .then(response => {Notify.success(_.get(response, 'message', 'Успех')); return response;})
+    .catch(error => { console.log(error) });
   }
   static put (uri, body) {
     return fetch(uri, {

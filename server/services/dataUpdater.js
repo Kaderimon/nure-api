@@ -6,11 +6,16 @@ import moment from 'moment';
 
 class DataUpdater {
     static async run () {
-        const teachers = await DataUpdater.teachers();
-        const groups = await DataUpdater.groups();
-        const faculties = await DataUpdater.faculties();
+        try {
+            await DataUpdater.teachers();
+            await DataUpdater.groups();
+            await DataUpdater.faculties();            
+        } catch (err) {
+            throw new Error(err);
+        }
         return {
-            message: 'YEAH BOIII'
+            message: 'Success',
+            sync: moment().format('llll')
         }
     }
     static async faculties () {
@@ -26,15 +31,23 @@ class DataUpdater {
             array[index].directions = directions[index].faculty.directions;
             array[index].departments = _.get(departments[index], 'faculty.departments', []);
         });
-        return  facultiesArray.map(async item => {
-            return await updateFacultet(item);
-        });
+        try {
+            facultiesArray.map(async item => {
+                return await updateFacultet(item);
+            });
+        } catch (err) {
+            throw new Error(err);
+        }
+        return {
+            message: 'База факультетов успешно обновлена',
+            sync: moment().format('llll')
+        }
     }
     static async teachers () {
         const teachersData = [];
         const departments = [];
         const data = await fetch(`${config.apiSource}/P_API_PODR_JSON`).then(r => r.json());
-        let faculties = _.get(data, 'university.faculties',[]);
+        let faculties = _.get(data, 'university.faculties', []);
         faculties.forEach(facultet => {
             departments.push(...facultet.departments);
         });
@@ -43,9 +56,17 @@ class DataUpdater {
                 teachersData.push(Object.assign({}, teacher, { "department_id": department.id }));
             })
         })
-        return teachersData.map(async item => {
-            return await updateTeacher(item);
-        });
+        try {
+            teachersData.map(async item => {
+                return await updateTeacher(item);
+            });
+        } catch (err) {
+            throw new Error(err);
+        }
+        return {
+            message: 'База преподавателей успешно обновлена',
+            sync: moment().format('llll')
+        }
     }
     static async events (id, target) {
         const data = await fetch(`${config.apiSource}/P_API_EVENTS_${target}_JSON?p_id_${target}=${id}`)
@@ -83,9 +104,17 @@ class DataUpdater {
                 })
             });
         })
-        return groupsData.map(async item => {
-            return await updateGroup(item);
-        });
+        try {
+            groupsData.map(async item => {
+                return await updateGroup(item);
+            });
+        } catch (err) {
+            throw new Error(err);
+        }
+        return {
+            message: 'База групп успешно обновлена',
+            sync: moment().format('llll')
+        }
     }
 }
 

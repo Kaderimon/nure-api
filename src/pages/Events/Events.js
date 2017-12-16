@@ -15,12 +15,12 @@ class Events extends Component {
   }
   componentDidMount() {
     const name = _.get(core.getLocal('event'),'name','');
-    this.setState({name}) ;
+    this.setState({name});
     this.fetchEvents();
     this.fetchInfo();
   }
   async fetchEvents () {
-    const { response } = await Transport.get(`/api/events/${this.props.match.params.id}`);
+    const response = await Transport.get(`/api/events/${this.props.match.params.id}`);
     const sync = _.get(response, 'sync', '')
     this.setState({
       data: _.get(response, 'events', []),
@@ -28,8 +28,10 @@ class Events extends Component {
     });
   }
   async fetchInfo () {
-    const path = this.props.location.pathname.split('/');
-    const { response } = await Transport.get(`/api/${path[1]}/${this.props.match.params.id}`);
+    const path = this.props.location.pathname.split('/')[1];
+    const id = this.props.match.params.id;
+    core.saveLocal('event', { id: id, type:path }, true)
+    const response = await Transport.get(`/api/${path}/${this.props.match.params.id}`);
     this.setState({name: response.short_name || response.name});
   }
   render () {

@@ -11,7 +11,9 @@ import { updateDB,
   getGroup,
   teacherEvents,
   groupEvents,
-  getEvent} from '../controllers/index.js'
+  getEvent,
+  updateGroups,
+  updateTeachers } from '../controllers/index.js'
   
 const router = new Router({
   prefix: '/api'
@@ -35,7 +37,7 @@ router
     ctx.status = 201;
   })
   .post('/teachers', async (ctx, next) => {
-    ctx.body = await getTeachers();
+    ctx.body = await updateTeachers();
     ctx.status = 201;
   })
   .get('/teachers/:id', async (ctx, next) => {
@@ -52,7 +54,7 @@ router
   })
   .post('/groups', async (ctx, next) => {
     ctx.status = 201;
-    ctx.body = await getGroups();
+    ctx.body = await updateGroups();
   })
   .get('/groups/:id', async (ctx, next) => {
     ctx.status = 201;

@@ -14,7 +14,7 @@ export async function setEvent(data) {
 export async function updateEvent(target) {
   return await EventModel.update({id: target.id}, target, {upsert: true}).then(function(user) {
     if(!user) {
-      throw new Error('Failed updating')
+      throw new Error('Произошла ошибка при обновлении')
     }
     return getEvent(target.id);
   });

@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import logo from '../../logo.png';
 import { NavLink } from 'react-router-dom';
 import './Header.css';
-import core from '../../core/core'
+import core from '../../core/core';
+import Transport from '../../core/Requester';
+import Notify from '../../core/Notify';
+import _ from 'lodash';
 
 class Header extends Component {
   constructor(props) {
@@ -14,10 +17,14 @@ class Header extends Component {
   getNavClass = () => (this.props.showNav ? 'fa-arrow-left' : 'fa-bars')
   update = () => {
     const {id, type} = core.getLocal('event');
-    console.log(id, type);
     this.setState({
       update: true
-    })
+    });
+    Transport.post(`/api/${type}/${id}`).then((response)=>{
+      this.setState({
+        update: false
+      });
+    });
   }
   render() {
     const spin = this.state.update ? 'fa-spin' : '';

@@ -15,11 +15,11 @@ class Groups extends Component {
     }
   }
   componentDidMount() {
-    core.saveLocal('event', {type: 'groups'});
+    core.saveLocal('event', {id:'', type: 'groups'}, true);
     this.fetchGroups();
   }
   async fetchGroups () {
-    const { response } = await Transport.get("/api/groups");
+    const response = await Transport.get("/api/groups");
     this.setState({data: response, search: response});
   }
   search = (val) => {

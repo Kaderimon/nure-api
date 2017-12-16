@@ -15,10 +15,11 @@ class Teachers extends Component {
     }
   }
   componentDidMount() {
+    core.saveLocal('event', {id:'', type: 'teachers'}, true);
     this.fetchTeachers();
   }
   async fetchTeachers () {
-    const { response } = await Transport.get("/api/teachers");
+    const response = await Transport.get("/api/teachers");
     this.setState({teachers: response, search: response});
   }
   search = (val) => {
@@ -43,7 +44,7 @@ class Teachers extends Component {
         <div className="items">
           {this.state.search.length > 0 ? this.state.search.map(teacher => <NavLink onClick={e => {
             e.preventDefault();
-            core.saveLocal('event', {id:teacher.id, name: teacher.short_name, type:'teacher'}, true);
+            core.saveLocal('event', {id:teacher.id, name: teacher.short_name, type:'teachers'}, true);
             this.props.history.push(`/teachers/${teacher.id}`);
           }} to={`/teachers/${teacher.id}`}>
               <Item data={teacher}/>
