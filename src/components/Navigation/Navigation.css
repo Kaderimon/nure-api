@@ -1,10 +1,11 @@
 .App-nav {
     background-color: #222;
     height: calc(100% - 67px);
-    left:0;
+    left: -150px;
     position: fixed;
     width: 150px;
     z-index: 1;
+    transition: 0.5s;
 }
 .App-nav__item {
     border-bottom: 1px solid dodgerblue;

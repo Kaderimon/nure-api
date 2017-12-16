@@ -8,7 +8,7 @@ class PageHead extends Component {
     render () {
         return <div className="page-header">
             <h1 className="App-title">{this.props.title}</h1>
-            <input type={'search'} className="search" placeholder="Search" onChange={this.onSearch}/>
+            <input type={'search'} className="search" placeholder="Поиск" onChange={this.onSearch}/>
         </div>
     }
 }

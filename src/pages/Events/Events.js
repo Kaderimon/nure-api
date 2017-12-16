@@ -39,7 +39,7 @@ class Events extends Component {
       <div className="groups">
         <div className="page-header">
             <h1 className="App-title">{this.state.name}</h1>
-            <p style={{color: '#fff'}}>Last sync: {this.state.sync}</p>
+            <p style={{color: '#fff'}}>Последнее обновление: {this.state.sync}</p>
         </div>
         <Calendar data={this.state.data}/>
       </div>

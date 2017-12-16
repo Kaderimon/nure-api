@@ -3,7 +3,7 @@ import EventModel from '../models/event';
 export async function getEvent(id) {
   return await EventModel.findOne({id: id}).then(function(user) {
     if(!user) {
-      throw new Error('No Events')
+      throw new Error('Расписание не загружено. Пожалуйста обновите!')
     }
     return user;
   });

@@ -17,14 +17,16 @@ class Header extends Component {
   getNavClass = () => (this.props.showNav ? 'fa-arrow-left' : 'fa-bars')
   update = () => {
     const {id, type} = core.getLocal('event');
-    this.setState({
-      update: true
-    });
-    Transport.post(`/api/${type}/${id}`).then((response)=>{
+    if(!this.state.update) {
       this.setState({
-        update: false
+        update: true
       });
-    });
+      Transport.post(`/api/${type}/${id}`).then((response)=>{
+        this.setState({
+          update: false
+        });
+      });      
+    }
   }
   render() {
     const spin = this.state.update ? 'fa-spin' : '';

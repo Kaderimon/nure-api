@@ -3,7 +3,9 @@ import _ from "lodash";
 import { setTeachers, updateTeacher, updateGroup, updateFacultet, updateEvent } from '../controllers/index.js'
 import config from '../config/config'
 import moment from 'moment';
+import 'moment/locale/ru';
 
+moment.locale('ru');
 class DataUpdater {
     static async run () {
         try {

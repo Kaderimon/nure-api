@@ -3,9 +3,10 @@ import { Col, Row, Button, ButtonGroup } from 'react-bootstrap';
 import moment from 'moment';
 import Header from './Header/Header';
 import Main from './Main/Main';
-
 import './calendar.css';
+import 'moment/locale/ru';
 
+moment.locale('ru');
 class Calendar extends Component {
   constructor (props) {
     super(props);
@@ -57,7 +58,7 @@ class Calendar extends Component {
         </div>
         <div className="c-table row">
           <div className="col-xs-12">        
-            <Header />
+            <Header week={moment().week(this.state.currentWeek)}/>
           </div>
           <Main data={this.filterByDate(this.props.data)}/>
         </div>

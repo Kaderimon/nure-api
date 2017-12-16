@@ -13,10 +13,6 @@ class Main extends Component {
     }
   }
 
-  componentDidMount() {
-    
-  }
-
   handleNavigation = (e) => {
     this.setState({
       showNav: !this.state.showNav
@@ -24,10 +20,11 @@ class Main extends Component {
   }
 
   render() {
+    const showNav = this.state.showNav ? {left:0} : {};
     return (
       <div className="App">
         <Header showNav={this.state.showNav} handleNavigation={this.handleNavigation}/>
-        {this.state.showNav && <Nav />}
+        <Nav style={showNav}/>
         <div className="App-main">
           {this.props.children}
         </div>

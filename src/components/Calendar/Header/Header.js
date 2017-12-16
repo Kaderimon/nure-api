@@ -7,8 +7,10 @@ class Header extends PureComponent {
         return (
             <Col xs={12} className="c-header">
                 <Col xs={1}></Col>
-                { daysOfWeek.map( item => 
-                    <Col xs={1}>{item}</Col>
+                { daysOfWeek.map( (item, i) => 
+                    <Col xs={1}>
+                        {`${this.props.week.day(i+1).format('D')} ${item}`}
+                    </Col>
                 )}
             </Col>
         );
