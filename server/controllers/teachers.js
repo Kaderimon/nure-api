@@ -6,6 +6,9 @@ export async function getTeacher(id) {
 export async function getTeachers() {
   return await Teacher.find();
 }
+export async function getTeachersByDepartment(dep) {
+  return await Teacher.find({department_id: dep});
+}
 export async function setTeachers(teachers) {
   return await Teacher.create(teachers);
 }

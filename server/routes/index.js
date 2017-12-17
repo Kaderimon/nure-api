@@ -13,7 +13,8 @@ import { updateDB,
   groupEvents,
   getEvent,
   updateGroups,
-  updateTeachers } from '../controllers/index.js'
+  updateTeachers,
+  getTeachersByDepartment } from '../controllers/index.js'
   
 const router = new Router({
   prefix: '/api'
@@ -36,13 +37,17 @@ router
     ctx.body = await getTeachers();
     ctx.status = 201;
   })
-  .post('/teachers', async (ctx, next) => {
-    ctx.body = await updateTeachers();
+  .get('/teachers/department/:id', async (ctx, next) => {
+    ctx.body = await getTeachersByDepartment(ctx.params.id);
     ctx.status = 201;
   })
   .get('/teachers/:id', async (ctx, next) => {
     ctx.status = 201;
     ctx.body = await getTeacher(ctx.params.id);
+  })
+  .post('/teachers', async (ctx, next) => {
+    ctx.body = await updateTeachers();
+    ctx.status = 201;
   })
   .post('/teachers/:id', koaBody, async (ctx, next) => {
     ctx.status = 201;

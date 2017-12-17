@@ -4,7 +4,7 @@ import { getFaculties,
     updateFacultet,
     setFacultet} from './faculties'
 import { getGroups, getGroup, setGroup, updateGroup } from './groups';
-import { getTeachers, getTeacher, setTeachers, updateTeacher } from './teachers';
+import { getTeachers, getTeacher, setTeachers, updateTeacher, getTeachersByDepartment } from './teachers';
 import { updateEvent, getEvent } from './events';
 
 export function updateDB() {
@@ -37,4 +37,5 @@ export { getFaculties,
     setTeachers,
     updateTeacher,
     updateEvent,
-    getEvent };
+    getEvent,
+    getTeachersByDepartment };
