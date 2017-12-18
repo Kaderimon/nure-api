@@ -14,7 +14,8 @@ import { updateDB,
   getEvent,
   updateGroups,
   updateTeachers,
-  getTeachersByDepartment } from '../controllers/index.js'
+  getTeachersByDepartment,
+  getGroupsByDirection } from '../controllers/index.js'
   
 const router = new Router({
   prefix: '/api'
@@ -37,13 +38,13 @@ router
     ctx.body = await getTeachers();
     ctx.status = 201;
   })
-  .get('/teachers/department/:id', async (ctx, next) => {
-    ctx.body = await getTeachersByDepartment(ctx.params.id);
-    ctx.status = 201;
-  })
   .get('/teachers/:id', async (ctx, next) => {
     ctx.status = 201;
     ctx.body = await getTeacher(ctx.params.id);
+  })
+  .get('/teachers/department/:id', async (ctx, next) => {
+    ctx.body = await getTeachersByDepartment(ctx.params.id);
+    ctx.status = 201;
   })
   .post('/teachers', async (ctx, next) => {
     ctx.body = await updateTeachers();
@@ -57,13 +58,17 @@ router
     ctx.status = 201;
     ctx.body = await getGroups();
   })
-  .post('/groups', async (ctx, next) => {
-    ctx.status = 201;
-    ctx.body = await updateGroups();
-  })
   .get('/groups/:id', async (ctx, next) => {
     ctx.status = 201;
     ctx.body = await getGroup(ctx.params.id);
+  })
+  .get('/groups/direction/:id', async (ctx, next) => {
+    ctx.body = await getGroupsByDirection(ctx.params.id);
+    ctx.status = 201;
+  })
+  .post('/groups', async (ctx, next) => {
+    ctx.status = 201;
+    ctx.body = await updateGroups();
   })
   .post('/groups/:id', koaBody, async (ctx, next) => {
     ctx.status = 201;

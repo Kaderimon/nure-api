@@ -3,7 +3,7 @@ import DataUpdater from '../services/dataupdater.js';
 import { getFaculties,
     updateFacultet,
     setFacultet} from './faculties'
-import { getGroups, getGroup, setGroup, updateGroup } from './groups';
+import { getGroups, getGroup, setGroup, updateGroup, getGroupsByDirection } from './groups';
 import { getTeachers, getTeacher, setTeachers, updateTeacher, getTeachersByDepartment } from './teachers';
 import { updateEvent, getEvent } from './events';
 
@@ -38,4 +38,5 @@ export { getFaculties,
     updateTeacher,
     updateEvent,
     getEvent,
-    getTeachersByDepartment };
+    getTeachersByDepartment,
+    getGroupsByDirection };

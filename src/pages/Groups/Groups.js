@@ -36,18 +36,21 @@ class Groups extends Component {
   found = (data, field, compareVal) => {
       return _.includes(_.toLower(data[field]), _.toLower(compareVal));
   }
+  renderGroups () {
+    return this.state.search.length > 0 ? this.state.search.map(group => <NavLink onClick={e => {
+      e.preventDefault();
+      core.saveLocal('event', {id:group.id, name: group.name, type:'groups'}, true);
+      this.props.history.push(`/groups/${group.id}`);
+    }} to={`/groups/${group.id}`}>
+        <Item data={group}/>
+      </NavLink>) : 'No data'
+  }
   render () {
     return (
       <div className="groups">
         <PageHead title="Группы" onChange={this.search} />
         <div className="items">
-          {this.state.search.length > 0 ? this.state.search.map(group => <NavLink onClick={e => {
-            e.preventDefault();
-            core.saveLocal('event', {id:group.id, name: group.name, type:'groups'}, true);
-            this.props.history.push(`/groups/${group.id}`);
-          }} to={`/groups/${group.id}`}>
-              <Item data={group}/>
-            </NavLink>) : 'No data'}
+          {this.renderGroups()}
         </div>
       </div>
     );

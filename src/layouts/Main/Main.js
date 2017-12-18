@@ -1,32 +1,47 @@
 import React, { Component } from 'react';
 import { Grid, Col, Row } from 'react-bootstrap';
-import Nav from '../../components/Navigation/Navigation'
-import Header from '../../components/Header/Header'
+import { Switch , Route } from 'react-router-dom'
+import Top from '../../components/Top/Top';
+import Transport from '../../core/Requester';
+import core from '../../core/core';
 import './Main.css'
+import Index from '../../pages/Home/Home'
+import Groups from '../../pages/Groups/Groups'
+import Teachers from '../../pages/Teachers/Teachers'
+import Events from '../../pages/Events/Events'
+import NotFound from '../../pages/NotFound/404'
 
 class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showNav: false,
-      updateDB: false
+      faculties: []
     }
   }
 
-  handleNavigation = (e) => {
-    this.setState({
-      showNav: !this.state.showNav
-    });
+  componentDidMount() {
+    this.fetchFaculties();
+  }
+
+  async fetchFaculties () {
+    const response = await Transport.get("/api/faculties");
+    this.setState({faculties: response});
   }
 
   render() {
-    const showNav = this.state.showNav ? {left:0} : {};
+    const showNav = this.state.showNav ? { left:0 } : {};
     return (
       <div className="App">
-        <Header showNav={this.state.showNav} handleNavigation={this.handleNavigation}/>
-        <Nav style={showNav}/>
+        <Top />
         <div className="App-main">
-          {this.props.children}
+          <Switch>
+              <Route exact path="/" component={Index}/>
+              <Route exact path="/groups" component={(props) => <Groups {...props} faculties={this.state.faculties}/>}/>
+              <Route exact path="/teachers" component={(props) => <Teachers {...props} faculties={this.state.faculties}/>}/>
+              <Route exact path="/groups/:id" component={Events}/>
+              <Route exact path="/teachers/:id" component={Events}/>
+              <Route component={NotFound}/>
+          </Switch>
         </div>
       </div>
     );

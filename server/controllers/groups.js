@@ -10,6 +10,9 @@ export async function getGroup(groupId) {
 export async function setGroup(groups) {
   return await Group.create(groups);
 }
+export async function getGroupsByDirection(dir) {
+  return await Group.find({direction_id: dir});
+}
 export async function updateGroup(group) {
   return await Group.update({id: group.id}, group, {upsert: true})
 }
