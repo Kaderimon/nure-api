@@ -11,9 +11,9 @@ class Main extends Component {
       let lessonColorToSet = "";
       const lesson = data.map(lesson => {
         const lessonDay = moment(1970).seconds(lesson.start_time).day();
-        if(lessonDay === dayNumber+1 && lesson.number_pair === i+1){
+        if ( lessonDay === dayNumber+1 && lesson.number_pair === i+1 ) {
           lessonColorToSet = lessonColor[_.get(lesson, "type.id_base", "default")];
-          return <div>
+          return <div onClick={this.props.showModal(lesson)}>
             {_.get(lesson, "subject.brief", "???")}
             <div style={{fontSize: "smaller", marginTop:"5px"}}>
               <span>{_.get(lesson, "type.short_name", "???")} </span>

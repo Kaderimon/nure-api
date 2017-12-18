@@ -5,6 +5,8 @@ import Header from './Header/Header';
 import Main from './Main/Main';
 import './calendar.css';
 import 'moment/locale/ru';
+import { Modal } from 'react-bootstrap';
+import _ from 'lodash';
 
 moment.locale('ru');
 class Calendar extends Component {
@@ -12,12 +14,18 @@ class Calendar extends Component {
     super(props);
     this.state = {
       currentWeek: moment().week(),
-      weekRange: ""
+      weekRange: "",
+      showModal: false,
+      modalData: {}
     }
   }
   componentDidMount() {
     this.currentWeek();
   }
+  close = () => {
+    this.setState({ showModal: false });
+  }
+  open = (data) => () => { this.setState({ showModal: true, modalData: data}) }
   nextWeek = (e) => {
     this.state.currentWeek++;
     this.state.weekRange = `${moment().week(this.state.currentWeek).day(1).format('D MMMM')} - ${moment().week(this.state.currentWeek).day(7).format('D MMMM')}`;
@@ -46,6 +54,17 @@ class Calendar extends Component {
   render () {
     return (
       <div className="calendar">
+        <Modal show={this.state.showModal} onHide={this.close}>
+          <Modal.Header closeButton>
+            <Modal.Title>Modal heading</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <h4>{_.get(this.state.modalData, 'subject.title', '???')}</h4>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button onClick={this.close}>Close</Button>
+          </Modal.Footer>
+        </Modal>
         <div className="c-control">
           <ButtonGroup>
             <Button onClick={this.previousWeek}><i className="fa fa-arrow-left fa-fw"></i></Button> 
@@ -60,7 +79,7 @@ class Calendar extends Component {
           <div className="col-xs-12">        
             <Header week={moment().week(this.state.currentWeek)}/>
           </div>
-          <Main data={this.filterByDate(this.props.data)}/>
+          <Main data={this.filterByDate(this.props.data)} showModal={this.open}/>
         </div>
       </div>
     );
