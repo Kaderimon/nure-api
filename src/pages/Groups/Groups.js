@@ -13,7 +13,8 @@ class Groups extends Component {
     this.state = {
       data: [],
       search: [],
-      facultet: _.get(props,'faculties[0].id', '')
+      facultet: _.get(props,'faculties[0].id', ''),
+      direction: _.get(props,'faculties[0].directions[0].id', '')
     }
   }
   componentDidMount() {
@@ -39,35 +40,52 @@ class Groups extends Component {
       return _.includes(_.toLower(data[field]), _.toLower(compareVal));
   }
   onFacultetSelect = (e) => {
-    this.setState({facultet: Number(e.target.value)});
+    const fac = _.find(this.props.faculties, {'id': Number(e.target.value)})
+    this.setState({
+      facultet: Number(e.target.value),
+      direction: _.get(fac,'directions[0].id', '')
+    });
+  }
+  onDirectionSelect = (e) => {
+    this.setState({direction: Number(e.target.value)});
   }
   renderGroups () {
-    return this.state.search.length > 0 ? 
-      this.state.search.map(group => {
-        return <NavLink onClick={e => {
+    if (this.state.search.length > 0) {
+      return this.state.search.map(group => {
+        const onNav = e => {
           e.preventDefault();
           core.saveLocal('event', {id:group.id, name: group.name, type:'groups'}, true);
           this.props.history.push(`/groups/${group.id}`);
-        }} to={`/groups/${group.id}`}>
-          <Item data={group}/>
-        </NavLink>
+        };
+        return group.direction_id === this.state.direction ? 
+          <NavLink onClick={onNav} to={`/groups/${group.id}`}>
+            <Item data={group}/>
+          </NavLink>
+          : null
       })
-      : 'No data';
+    }
+    return 'No data';
   }
   render () {
     const facultet = _.find(this.props.faculties, {'id': this.state.facultet})
-    console.log(facultet);
+
     return (
       <div className="groups">
         <PageHead title="Группы" onChange={this.search} />
-        <FormGroup controlId="formControlsSelect">
-          <ControlLabel>Select</ControlLabel>
+        <FormGroup controlId="formControlsSelect" className="col-xs-6">
+          <ControlLabel>Выберите факультет</ControlLabel>
           <FormControl componentClass="select" placeholder="select" onChange={this.onFacultetSelect}>
             {_.sortBy(this.props.faculties, ['short_name']).map((fac) => <option value={fac.id}>{fac.short_name}</option>)}
           </FormControl>
         </FormGroup>
-        <div>{_.get(facultet, 'directions', []).map(dir => <div>{dir.short_name}</div>)}</div>
-        <div className="items">
+        <FormGroup controlId="formControlsSelect" className="col-xs-6">
+          <ControlLabel>Выберите кафедру</ControlLabel>
+          <FormControl componentClass="select" placeholder="select" onChange={this.onDirectionSelect}>
+            {_.get(facultet, 'directions', []).map((dir) => <option value={dir.id}>{dir.short_name}</option>)}
+          </FormControl>
+        </FormGroup>
+        <div className="items col-xs-12">
+          {this.renderGroups()}
         </div>
       </div>
     );

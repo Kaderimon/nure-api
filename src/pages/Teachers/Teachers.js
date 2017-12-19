@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
+import { FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 import Transport from '../../core/Requester';
 import core from '../../core/core';
 import Item from '../../components/Item/Item';
@@ -11,7 +12,9 @@ class Teachers extends Component {
     super(props);
     this.state = {
       teachers: [],
-      search: []
+      search: [],
+      facultet: _.get(props,'faculties[0].id', ''),
+      department: _.get(props,'faculties[0].departments[0].id', '')
     }
   }
   componentDidMount() {
@@ -36,19 +39,53 @@ class Teachers extends Component {
   found = (data, field, compareVal) => {
       return _.includes(_.toLower(data[field]), _.toLower(compareVal));
   }
-
+  onFacultetSelect = (e) => {
+    const fac = _.find(this.props.faculties, {'id': Number(e.target.value)})
+    this.setState({
+      facultet: Number(e.target.value),
+      department: _.get(fac,'departments[0].id', '')
+    });
+  }
+  onDepSelect = (e) => {
+    this.setState({department: Number(e.target.value)});
+  }
+  renderGroups () {
+    if (this.state.search.length > 0) {
+      return this.state.search.map(teacher => {
+        const onNav = e => {
+          e.preventDefault();
+          core.saveLocal('event', {id:teacher.id, name: teacher.short_name, type:'teachers'}, true);
+          this.props.history.push(`/teachers/${teacher.id}`);
+        };
+        return teacher.department_id === this.state.department ? 
+          <NavLink onClick={onNav} to={`/teachers/${teacher.id}`}>
+            <Item data={teacher}/>
+          </NavLink>
+          : null
+      })
+    }
+    return 'No data';
+  }
   render () {
+    const facultet = _.find(this.props.faculties, {'id': this.state.facultet})
+
     return (
       <div className="teachers">
         <PageHead title="Преподаватели" onChange={this.search} />
-        <div className="items">
-          {this.state.search.length > 0 ? this.state.search.map(teacher => <NavLink onClick={e => {
-            e.preventDefault();
-            core.saveLocal('event', {id:teacher.id, name: teacher.short_name, type:'teachers'}, true);
-            this.props.history.push(`/teachers/${teacher.id}`);
-          }} to={`/teachers/${teacher.id}`}>
-              <Item data={teacher}/>
-            </NavLink>) : 'No Data'}
+        <FormGroup controlId="formControlsSelect" className="col-xs-6">
+          <ControlLabel>Выберите факультет</ControlLabel>
+          <FormControl componentClass="select" placeholder="select" onChange={this.onFacultetSelect}>
+            {_.sortBy(this.props.faculties, ['short_name']).map((fac) => <option value={fac.id}>{fac.short_name}</option>)}
+          </FormControl>
+        </FormGroup>
+        <FormGroup controlId="formControlsSelect" className="col-xs-6">
+          <ControlLabel>Выберите кафедру</ControlLabel>
+          <FormControl componentClass="select" placeholder="select" onChange={this.onDepSelect}>
+            {_.get(facultet, 'departments', []).map((dep) => <option value={dep.id}>{dep.short_name}</option>)}
+          </FormControl>
+        </FormGroup>
+        <div className="items col-xs-12">
+          {this.renderGroups()}
         </div>
       </div>
     );
