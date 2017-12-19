@@ -51,20 +51,55 @@ class Calendar extends Component {
       return time.isSame(currentWeek, 'week') 
     });
   }
+  renderModal () {
+    return <Modal show={this.state.showModal} onHide={this.close}>
+      <Modal.Header closeButton>
+        <Modal.Title>{_.get(this.state.modalData, 'subject.title', '???')}</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <Row className="c-modal-row">
+          <Col xs={6}>
+            <h3>Тип:</h3>
+          </Col>
+          <Col xs={6}>
+            <div>{_.get(this.state.modalData, 'type.full_name', "")}</div>
+          </Col>
+        </Row>
+        <Row className="c-modal-row">
+          <Col xs={6}>
+            <h3>Аудитория:</h3>
+          </Col>
+          <Col xs={6}>
+            <div>{_.get(this.state.modalData, 'auditory', "")}</div>
+          </Col>
+        </Row>
+        <Row className="c-modal-row">
+          <Col xs={6}>
+            <h3>Преподаватели:</h3>
+          </Col>
+          <Col xs={6}>
+            {_.get(this.state.modalData, 'teachers', []).map(teacher => {
+                return <div>{teacher.full_name}</div>
+            })}
+          </Col>
+        </Row>
+        <Row className="c-modal-row">
+          <Col xs={6}>
+            <h3>Группы:</h3>
+          </Col>
+          <Col xs={6}>
+            {_.get(this.state.modalData, 'groups', []).map(group => {
+              return <div>{group.name}</div>
+            })}
+          </Col>
+        </Row>
+      </Modal.Body>
+    </Modal>
+  }
   render () {
     return (
       <div className="calendar">
-        <Modal show={this.state.showModal} onHide={this.close}>
-          <Modal.Header closeButton>
-            <Modal.Title>Modal heading</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <h4>{_.get(this.state.modalData, 'subject.title', '???')}</h4>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button onClick={this.close}>Close</Button>
-          </Modal.Footer>
-        </Modal>
+        {this.renderModal()}
         <div className="c-control">
           <ButtonGroup>
             <Button onClick={this.previousWeek}><i className="fa fa-arrow-left fa-fw"></i></Button> 

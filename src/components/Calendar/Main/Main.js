@@ -7,13 +7,15 @@ import './Main.css';
 
 class Main extends Component {
   renderLessons(data, i) {
-    return daysOfWeek.map( (day,dayNumber) => {
+    return daysOfWeek.map((day,dayNumber) => {
       let lessonColorToSet = "";
-      const lesson = data.map(lesson => {
+      let modalData = {};
+      const lessons = data.map(lesson => {
         const lessonDay = moment(1970).seconds(lesson.start_time).day();
         if ( lessonDay === dayNumber+1 && lesson.number_pair === i+1 ) {
           lessonColorToSet = lessonColor[_.get(lesson, "type.id_base", "default")];
-          return <div onClick={this.props.showModal(lesson)}>
+          modalData = { ...lesson }
+          return <div>
             {_.get(lesson, "subject.brief", "???")}
             <div style={{fontSize: "smaller", marginTop:"5px"}}>
               <span>{_.get(lesson, "type.short_name", "???")} </span>
@@ -22,8 +24,8 @@ class Main extends Component {
           </div>
         }
       })
-      return <Col xs={1} className="lesson" style={{backgroundColor: lessonColorToSet}}>
-        {lesson}
+      return <Col xs={1} className="lesson" style={{backgroundColor: lessonColorToSet}} onClick={this.props.showModal(modalData)}>
+        {lessons}
       </Col>
     })
   }
