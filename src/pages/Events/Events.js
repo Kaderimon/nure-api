@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Calendar from '../../components/Calendar/calendar';
 import Transport from '../../core/Requester';
 import core from '../../core/core';
+import { config } from '../../config/config.js';
 import _ from 'lodash';
 
 class Events extends Component {
@@ -20,7 +21,7 @@ class Events extends Component {
     this.fetchInfo();
   }
   async fetchEvents () {
-    const response = await Transport.get(`/api/events/${this.props.match.params.id}`);
+    const response = await Transport.get(`${config.apis.events}${this.props.match.params.id}`);
     const sync = _.get(response, 'sync', '')
     this.setState({
       data: _.get(response, 'events', []),

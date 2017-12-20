@@ -4,6 +4,7 @@ import { FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 import Item from '../../components/Item/Item';
 import Transport from '../../core/Requester';
 import PageHead from '../../components/PageHead/PageHead';
+import { config } from '../../config/config.js';
 import _ from 'lodash';
 import core from '../../core/core';
 
@@ -22,7 +23,7 @@ class Groups extends Component {
     this.fetchGroups();
   }
   async fetchGroups () {
-    const response = await Transport.get("/api/groups");
+    const response = await Transport.get(config.apis.groups);
     this.setState({data: response, search: response});
   }
   search = (val) => {
@@ -73,13 +74,13 @@ class Groups extends Component {
       <div className="groups">
         <PageHead title="Группы" onChange={this.search} />
         <FormGroup controlId="formControlsSelect" className="col-xs-6">
-          <ControlLabel>Выберите факультет</ControlLabel>
+          <ControlLabel className="dropdown-label">Выберите факультет</ControlLabel>
           <FormControl componentClass="select" placeholder="select" onChange={this.onFacultetSelect}>
             {_.sortBy(this.props.faculties, ['short_name']).map((fac) => <option value={fac.id}>{fac.short_name}</option>)}
           </FormControl>
         </FormGroup>
         <FormGroup controlId="formControlsSelect" className="col-xs-6">
-          <ControlLabel>Выберите кафедру</ControlLabel>
+          <ControlLabel className="dropdown-label">Выберите кафедру</ControlLabel>
           <FormControl componentClass="select" placeholder="select" onChange={this.onDirectionSelect}>
             {_.get(facultet, 'directions', []).map((dir) => <option value={dir.id}>{dir.short_name}</option>)}
           </FormControl>

@@ -27,3 +27,8 @@
 	text-align: right;
 	padding: 8px;
 }
+
+.dropdown-label{
+    margin-bottom: 10px;
+    color: white;
+}

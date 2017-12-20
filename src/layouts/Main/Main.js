@@ -4,12 +4,13 @@ import { Switch , Route } from 'react-router-dom'
 import Top from '../../components/Top/Top';
 import Transport from '../../core/Requester';
 import core from '../../core/core';
-import './Main.css'
-import Index from '../../pages/Home/Home'
-import Groups from '../../pages/Groups/Groups'
-import Teachers from '../../pages/Teachers/Teachers'
-import Events from '../../pages/Events/Events'
-import NotFound from '../../pages/NotFound/404'
+import './Main.css';
+import Index from '../../pages/Home/Home';
+import Groups from '../../pages/Groups/Groups';
+import Teachers from '../../pages/Teachers/Teachers';
+import Events from '../../pages/Events/Events';
+import NotFound from '../../pages/NotFound/404';
+import { config } from '../../config/config.js';
 
 class Main extends Component {
   constructor(props) {
@@ -24,7 +25,7 @@ class Main extends Component {
   }
 
   async fetchFaculties () {
-    const response = await Transport.get("/api/faculties");
+    const response = await Transport.get(config.apis.faculties);
     this.setState({faculties: response});
   }
 

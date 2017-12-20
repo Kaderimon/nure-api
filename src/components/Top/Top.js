@@ -10,7 +10,7 @@ class Top extends Component {
     }
   }
 
-  handleNavigation = (e) => {
+  handleNavigation = () => {
     this.setState({
       showNav: !this.state.showNav
     });
@@ -21,7 +21,7 @@ class Top extends Component {
     return (
       <div>
         <Header showNav={this.state.showNav} handleNavigation={this.handleNavigation}/>
-        <Nav style={showNav}/>
+        <Nav style={showNav} handleNavigation={this.handleNavigation}/>
       </div>
     );
   }
