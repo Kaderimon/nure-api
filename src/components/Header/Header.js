@@ -6,6 +6,7 @@ import core from '../../core/core';
 import Transport from '../../core/Requester';
 import Notify from '../../core/Notify';
 import _ from 'lodash';
+import { config } from '../../config/config.js';
 
 class Header extends Component {
   constructor(props) {
@@ -21,7 +22,7 @@ class Header extends Component {
       this.setState({
         update: true
       });
-      Transport.post(`/api/${type}/${id}`).then((response)=>{
+      Transport.post(`${config.apis.updater}${type}/${id}`).then((response)=>{
         this.setState({
           update: false
         });

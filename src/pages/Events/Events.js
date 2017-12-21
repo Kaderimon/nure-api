@@ -22,7 +22,7 @@ class Events extends Component {
   }
   async fetchEvents () {
     const response = await Transport.get(`${config.apis.events}${this.props.match.params.id}`);
-    const sync = _.get(response, 'sync', '')
+    const sync = _.get(response, 'sync', 'Неизвестно')
     this.setState({
       data: _.get(response, 'events', []),
       sync
