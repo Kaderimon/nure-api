@@ -9,7 +9,7 @@ class Main extends Component {
   renderLessons(data, i) {
     return daysOfWeek.map((day,dayNumber) => {
       let lessonColorToSet = "";
-      let modalData = {};
+      let modalData = null;
       const lessons = data.map(lesson => {
         const lessonDay = moment(1970).seconds(lesson.start_time).day();
         if ( lessonDay === dayNumber+1 && lesson.number_pair === i+1 ) {
@@ -24,7 +24,8 @@ class Main extends Component {
           </div>
         }
       })
-      return <Col xs={1} className="lesson" style={{backgroundColor: lessonColorToSet}} onClick={this.props.showModal(modalData)}>
+      const showModal = modalData ? this.props.showModal(modalData) : ()=>{};
+      return <Col xs={1} className="lesson" style={{backgroundColor: lessonColorToSet}} onClick={showModal}>
         {lessons}
       </Col>
     })

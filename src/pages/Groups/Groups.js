@@ -51,15 +51,16 @@ class Groups extends Component {
     this.setState({direction: Number(e.target.value)});
   }
   renderGroups () {
-    if (this.state.search.length > 0) {
+    const length = _.get(this.state, 'search.length', 0);
+    if (length > 0) {
       return this.state.search.map(group => {
-        const onNav = e => {
+        const navigate = e => {
           e.preventDefault();
           core.saveLocal('event', {id:group.id, name: group.name, type:'groups'}, true);
           this.props.history.push(`/groups/${group.id}`);
         };
         return group.direction_id === this.state.direction ? 
-          <NavLink onClick={onNav} to={`/groups/${group.id}`}>
+          <NavLink onClick={navigate} to={`/groups/${group.id}`}>
             <Item data={group}/>
           </NavLink>
           : null

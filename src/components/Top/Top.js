@@ -10,9 +10,9 @@ class Top extends Component {
     }
   }
 
-  handleNavigation = () => {
+  handleNavigation = (status) => {
     this.setState({
-      showNav: !this.state.showNav
+      showNav: status
     });
   }
 

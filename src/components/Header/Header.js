@@ -33,13 +33,11 @@ class Header extends Component {
     const spin = this.state.update ? 'fa-spin' : '';
     return (
       <header className="App-header">
-        <i onClick={this.props.handleNavigation}
-          className={`fa ${this.getNavClass()} fa-fw pointer`}></i>
+        <i onClick={this.props.handleNavigation} className={`fa ${this.getNavClass()} fa-fw pointer`}></i>
         <NavLink to='/'>
           <img src={logo} style={{height: "60px", marginTop: "-20px"}}/>
         </NavLink>
-          <i onClick={this.update}
-            className={`fa fa-refresh fa-fw pointer ${spin}`}></i>
+        <i onClick={this.update} className={`fa fa-refresh fa-fw pointer ${spin}`}></i>
       </header>
     );
   }

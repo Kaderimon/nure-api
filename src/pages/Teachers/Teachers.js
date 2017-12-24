@@ -51,7 +51,8 @@ class Teachers extends Component {
     this.setState({department: Number(e.target.value)});
   }
   renderGroups () {
-    if (this.state.search.length > 0) {
+    const length = _.get(this.state, 'search.length', 0);
+    if (length > 0) {
       return this.state.search.map(teacher => {
         const onNav = e => {
           e.preventDefault();
