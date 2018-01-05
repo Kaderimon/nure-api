@@ -95,4 +95,3 @@ class Groups extends Component {
 }
 
 export default Groups;
-//{this.renderGroups()}
