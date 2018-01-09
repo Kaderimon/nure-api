@@ -5,6 +5,7 @@ import Transport from '../../core/Requester';
 import core from '../../core/core';
 import Item from '../../components/Item/Item';
 import PageHead from '../../components/PageHead/PageHead';
+import Filter from '../../components/Filter/Filter';
 import { config } from '../../config/config.js';
 import _ from 'lodash';
 
@@ -14,7 +15,7 @@ class Teachers extends Component {
     this.state = {
       teachers: [],
       search: [],
-      facultet: _.get(props,'faculties[0].id', ''),
+      facultet: 'All',
       department: _.get(props,'faculties[0].departments[0].id', '')
     }
   }
@@ -74,18 +75,13 @@ class Teachers extends Component {
     return (
       <div className="teachers">
         <PageHead title="Преподаватели" onChange={this.search} />
-        <FormGroup controlId="formControlsSelect" className="col-xs-6">
-          <ControlLabel className="dropdown-label">Выберите факультет</ControlLabel>
-          <FormControl componentClass="select" placeholder="select" onChange={this.onFacultetSelect}>
-            {_.sortBy(this.props.faculties, ['short_name']).map((fac) => <option value={fac.id}>{fac.short_name}</option>)}
-          </FormControl>
-        </FormGroup>
-        <FormGroup controlId="formControlsSelect" className="col-xs-6">
-          <ControlLabel className="dropdown-label">Выберите кафедру</ControlLabel>
-          <FormControl componentClass="select" placeholder="select" onChange={this.onDepSelect}>
-            {_.get(facultet, 'departments', []).map((dep) => <option value={dep.id}>{dep.short_name}</option>)}
-          </FormControl>
-        </FormGroup>
+        <Filter 
+          faculties={this.props.faculties}
+          facultet={this.state.facultet}
+          onFacultetSelect={this.onFacultetSelect}
+          onDepSelect={this.onDepSelect}
+          selector={'departments'}
+          />
         <div className="items col-xs-12">
           {this.renderGroups()}
         </div>

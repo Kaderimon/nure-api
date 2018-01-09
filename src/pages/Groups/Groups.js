@@ -4,6 +4,7 @@ import { FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 import Item from '../../components/Item/Item';
 import Transport from '../../core/Requester';
 import PageHead from '../../components/PageHead/PageHead';
+import Filter from '../../components/Filter/Filter';
 import { config } from '../../config/config.js';
 import _ from 'lodash';
 import core from '../../core/core';
@@ -14,7 +15,7 @@ class Groups extends Component {
     this.state = {
       data: [],
       search: [],
-      facultet: _.get(props,'faculties[0].id', ''),
+      facultet: 'All',
       direction: _.get(props,'faculties[0].directions[0].id', '')
     }
   }
@@ -69,23 +70,16 @@ class Groups extends Component {
     return 'No data';
   }
   render () {
-    const facultet = _.find(this.props.faculties, {'id': this.state.facultet})
-
     return (
       <div className="groups">
         <PageHead title="Группы" onChange={this.search} />
-        <FormGroup controlId="formControlsSelect" className="col-xs-6">
-          <ControlLabel className="dropdown-label">Выберите факультет</ControlLabel>
-          <FormControl componentClass="select" placeholder="select" onChange={this.onFacultetSelect}>
-            {_.sortBy(this.props.faculties, ['short_name']).map((fac) => <option value={fac.id}>{fac.short_name}</option>)}
-          </FormControl>
-        </FormGroup>
-        <FormGroup controlId="formControlsSelect" className="col-xs-6">
-          <ControlLabel className="dropdown-label">Выберите кафедру</ControlLabel>
-          <FormControl componentClass="select" placeholder="select" onChange={this.onDirectionSelect}>
-            {_.get(facultet, 'directions', []).map((dir) => <option value={dir.id}>{dir.short_name}</option>)}
-          </FormControl>
-        </FormGroup>
+        <Filter 
+          faculties={this.props.faculties}
+          facultet={this.state.facultet}
+          onFacultetSelect={this.onFacultetSelect}
+          onDepSelect={this.onDirectionSelect}
+          selector={'directions'}
+          />
         <div className="items col-xs-12">
           {this.renderGroups()}
         </div>
