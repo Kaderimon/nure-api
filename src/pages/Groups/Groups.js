@@ -44,7 +44,7 @@ class Groups extends Component {
   onFacultetSelect = (e) => {
     const fac = _.find(this.props.faculties, {'id': Number(e.target.value)})
     this.setState({
-      facultet: Number(e.target.value),
+      facultet: e.target.value,
       direction: _.get(fac,'directions[0].id', '')
     });
   }
@@ -73,15 +73,17 @@ class Groups extends Component {
     return (
       <div className="groups">
         <PageHead title="Группы" onChange={this.search} />
-        <Filter 
-          faculties={this.props.faculties}
-          facultet={this.state.facultet}
-          onFacultetSelect={this.onFacultetSelect}
-          onDepSelect={this.onDirectionSelect}
-          selector={'directions'}
-          />
-        <div className="items col-xs-12">
-          {this.renderGroups()}
+        <div>
+          <Filter 
+            faculties={this.props.faculties}
+            facultet={this.state.facultet}
+            onFacultetSelect={this.onFacultetSelect}
+            onDepSelect={this.onDirectionSelect}
+            selector={'directions'}
+            />
+          <div className="items col-xs-8">
+            {this.renderGroups()}
+          </div>
         </div>
       </div>
     );

@@ -44,7 +44,7 @@ class Teachers extends Component {
   onFacultetSelect = (e) => {
     const fac = _.find(this.props.faculties, {'id': Number(e.target.value)})
     this.setState({
-      facultet: Number(e.target.value),
+      facultet: e.target.value,
       department: _.get(fac,'departments[0].id', '')
     });
   }
@@ -82,7 +82,7 @@ class Teachers extends Component {
           onDepSelect={this.onDepSelect}
           selector={'departments'}
           />
-        <div className="items col-xs-12">
+        <div className="items col-xs-8">
           {this.renderGroups()}
         </div>
       </div>
