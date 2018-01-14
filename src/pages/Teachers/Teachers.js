@@ -8,6 +8,7 @@ import PageHead from '../../components/PageHead/PageHead';
 import Filter from '../../components/Filter/Filter';
 import { config } from '../../config/config.js';
 import _ from 'lodash';
+import ReactPaginate from 'react-paginate';
 
 class Teachers extends Component {
   constructor (props) {
@@ -15,8 +16,9 @@ class Teachers extends Component {
     this.state = {
       teachers: [],
       search: [],
-      facultet: 'All',
-      department: _.get(props,'faculties[0].departments[0].id', '')
+      facultet: 'all',
+      department: 'all',
+      pageCount: 12
     }
   }
   componentDidMount() {
@@ -45,11 +47,11 @@ class Teachers extends Component {
     const fac = _.find(this.props.faculties, {'id': Number(e.target.value)})
     this.setState({
       facultet: e.target.value,
-      department: _.get(fac,'departments[0].id', '')
+      department: _.get(fac,'departments[0].id', 'all')
     });
   }
   onDepSelect = (e) => {
-    this.setState({department: Number(e.target.value)});
+    this.setState({department: e.target.value});
   }
   renderGroups () {
     const length = _.get(this.state, 'search.length', 0);
@@ -60,11 +62,9 @@ class Teachers extends Component {
           core.saveLocal('event', {id:teacher.id, name: teacher.short_name, type:'teachers'}, true);
           this.props.history.push(`/teachers/${teacher.id}`);
         };
-        return teacher.department_id === this.state.department ? 
-          <NavLink onClick={onNav} to={`/teachers/${teacher.id}`}>
+        return <NavLink onClick={onNav} to={`/teachers/${teacher.id}`}>
             <Item data={teacher}/>
           </NavLink>
-          : null
       })
     }
     return 'No data';
@@ -82,8 +82,21 @@ class Teachers extends Component {
           onDepSelect={this.onDepSelect}
           selector={'departments'}
           />
-        <div className="items col-xs-8">
-          {this.renderGroups()}
+        <div className="col-xs-8">
+          <div className="items">
+            {this.renderGroups()}
+          </div>
+          <ReactPaginate previousLabel={<i className="fa fa-arrow-left pointer"></i>}
+                        nextLabel={<i className="fa fa-arrow-right pointer"></i>}
+                        breakLabel={<a href=""><i className="fa fa-ellipsis-h" aria-hidden="true"></i></a>}
+                        breakClassName={"break-me"}
+                        pageCount={this.state.pageCount}
+                        marginPagesDisplayed={2}
+                        pageRangeDisplayed={3}
+                        onPageChange={this.handlePageClick}
+                        containerClassName={"pagination"}
+                        subContainerClassName={"pages pagination"}
+                        activeClassName={"active"} />
         </div>
       </div>
     );
