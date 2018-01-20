@@ -1,8 +1,4 @@
 .App {
-	background: url("../../bg.jpg") white;
-	background-attachment: fixed;
-	background-repeat: no-repeat;
-	background-size: cover;
 	text-align: center;
 }
   
@@ -12,9 +8,16 @@
 }
   
 .App-main{
+	display: inline-block;
 	margin-top: 67px;
 	min-height: calc(100vh - 67px);
+	width: 100%;
 	padding: 20px;
+	background: url("../../bg.jpg") white;
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+	background-size: cover;
+	text-align: center;
 }
   
 .App-intro {

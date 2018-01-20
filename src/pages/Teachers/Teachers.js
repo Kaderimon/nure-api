@@ -53,6 +53,9 @@ class Teachers extends Component {
   onDepSelect = (e) => {
     this.setState({department: e.target.value});
   }
+  handlePageClick = (e) => {
+    console.log(e);
+  }
   renderGroups () {
     const length = _.get(this.state, 'search.length', 0);
     if (length > 0) {
