@@ -5,6 +5,7 @@ import Item from '../../components/Item/Item';
 import Transport from '../../core/Requester';
 import PageHead from '../../components/PageHead/PageHead';
 import Filter from '../../components/Filter/Filter';
+import FEtable from '../../components/FEtable/FEtable';
 import { config } from '../../config/config.js';
 import _ from 'lodash';
 import core from '../../core/core';
@@ -15,18 +16,21 @@ class Groups extends Component {
     this.state = {
       data: [],
       search: [],
-      facultet: 'All',
-      direction: _.get(props,'faculties[0].directions[0].id', '')
+      facultet: 'all',
+      department: 'all',
     }
   }
+
   componentDidMount() {
     core.saveLocal('event', {id:'', type: 'groups'}, true);
     this.fetchGroups();
   }
+
   async fetchGroups () {
     const response = await Transport.get(config.apis.groups);
     this.setState({data: response, search: response});
   }
+
   search = (val) => {
     if (val !== '') {
         this.setState({
@@ -38,37 +42,23 @@ class Groups extends Component {
       this.setState({search: this.state.data});
     }
   }
+
   found = (data, field, compareVal) => {
       return _.includes(_.toLower(data[field]), _.toLower(compareVal));
   }
+
   onFacultetSelect = (e) => {
     const fac = _.find(this.props.faculties, {'id': Number(e.target.value)})
     this.setState({
       facultet: e.target.value,
-      direction: _.get(fac,'directions[0].id', '')
+      direction: _.get(fac,'directions[0].id', 'all')
     });
   }
+
   onDirectionSelect = (e) => {
-    this.setState({direction: Number(e.target.value)});
+    this.setState({direction: e.target.value});
   }
-  renderGroups () {
-    const length = _.get(this.state, 'search.length', 0);
-    if (length > 0) {
-      return this.state.search.map(group => {
-        const navigate = e => {
-          e.preventDefault();
-          core.saveLocal('event', {id:group.id, name: group.name, type:'groups'}, true);
-          this.props.history.push(`/groups/${group.id}`);
-        };
-        return group.direction_id === this.state.direction ? 
-          <NavLink onClick={navigate} to={`/groups/${group.id}`}>
-            <Item data={group}/>
-          </NavLink>
-          : null
-      })
-    }
-    return 'No data';
-  }
+
   render () {
     return (
       <div className="groups">
@@ -81,9 +71,10 @@ class Groups extends Component {
             onDepSelect={this.onDirectionSelect}
             selector={'directions'}
             />
-          <div className="items col-xs-8">
-            {this.renderGroups()}
-          </div>
+          <FEtable
+            data={this.state.search}
+            root={'teachers'}
+            history={this.props.history}/>
         </div>
       </div>
     );
