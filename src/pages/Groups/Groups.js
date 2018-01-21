@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
-import { FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
-import Item from '../../components/Item/Item';
 import Transport from '../../core/Requester';
 import PageHead from '../../components/PageHead/PageHead';
 import Filter from '../../components/Filter/Filter';
@@ -14,7 +11,7 @@ class Groups extends Component {
   constructor (props) {
     super(props);
     this.state = {
-      data: [],
+      groups: [],
       search: [],
       facultet: 'all',
       department: 'all',
@@ -28,18 +25,18 @@ class Groups extends Component {
 
   async fetchGroups () {
     const response = await Transport.get(config.apis.groups);
-    this.setState({data: response, search: response});
+    this.setState({groups: response, search: response});
   }
 
   search = (val) => {
     if (val !== '') {
         this.setState({
-            search: _.filter(this.state.data, data => {
+            search: _.filter(this.state.groups, data => {
                 return this.found(data, 'name', val) || this.found(data, 'id', val);
             })
         });
     } else {
-      this.setState({search: this.state.data});
+      this.filter()
     }
   }
 
@@ -52,18 +49,29 @@ class Groups extends Component {
     this.setState({
       facultet: e.target.value,
       direction: _.get(fac,'directions[0].id', 'all')
-    });
+    }, ()=>this.filter());
   }
 
   onDirectionSelect = (e) => {
-    this.setState({direction: e.target.value});
+    this.setState({direction: e.target.value}, ()=>this.filter());
+  }
+
+  filter() {
+    const { direction, facultet } = this.state;
+    if(facultet === 'all'){
+      this.setState({ search: this.state.groups });
+      return;
+    }
+    const search = direction === 'all' ? 
+      [] : this.state.groups.filter( item => item.direction_id === Number(direction) );
+    this.setState({ search });
   }
 
   render () {
     return (
       <div className="groups">
         <PageHead title="Группы" onChange={this.search} />
-        <div>
+        <div className="flex">
           <Filter 
             faculties={this.props.faculties}
             facultet={this.state.facultet}
@@ -73,7 +81,7 @@ class Groups extends Component {
             />
           <FEtable
             data={this.state.search}
-            root={'teachers'}
+            root={'groups'}
             history={this.props.history}/>
         </div>
       </div>

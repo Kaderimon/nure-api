@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import './Home.css';
-import _ from 'lodash'
-import Transport from '../../core/Requester';
 import core from '../../core/core';
 
 class Home extends Component {

@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
-import { FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
-import Transport from '../../core/Requester';
 import core from '../../core/core';
 import Item from '../../components/Item/Item';
-import { config } from '../../config/config.js';
 import _ from 'lodash';
 import ReactPaginate from 'react-paginate';
 import './FEtable.css'
@@ -44,23 +41,23 @@ class FEtable extends Component {
     const { currentPage, perPage } = this.state;
     const quickMath = currentPage*perPage;
     if (length > 0) {
-      return this.state.data.slice(quickMath, quickMath+perPage).map( val => {
+      return this.state.data.slice(quickMath, quickMath+perPage).map( (val, i) => {
         const onNav = e => {
           e.preventDefault();
           core.saveLocal('event', {id:val.id, name: val.short_name, type: this.state.root}, true);
           this.props.history.push(`/${this.state.root}/${val.id}`);
         };
-        return <NavLink onClick={onNav} to={`/${this.state.root}/${val.id}`}>
+        return <NavLink key={`item${i}`} onClick={onNav} to={`/${this.state.root}/${val.id}`}>
             <Item data={val}/>
           </NavLink>
       })
     }
-    return 'No data';
+    return <Item empty={true} />;
   }
 
   render () {
     return (
-        <div className="col-xs-8 FEtable" style={{border:"1px solid #ccc"}}>
+        <div className="col-xs-offset-1 col-xs-7 FEtable">
           <div className="items">
             {this.renderGroups()}
           </div>

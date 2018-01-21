@@ -1,3 +1,13 @@
+:root {
+	--main-bg-color: #f6f1e3;
+	--secondary-bg-color: #ffffff;
+	--main-title-color: #000000;
+	--main-color: #0076b1;
+	--main-hover-color: #890377;
+	--block-bg-color: #F9F6ED;
+    --block-border-color: #F2EBD7;
+}
+
 .App {
 	text-align: center;
 }
@@ -5,6 +15,7 @@
 .App-title {
 	font-size: 1.5em;
 	text-align: left;
+	color: var(--main-title-color);
 }
   
 .App-main{
@@ -13,7 +24,7 @@
 	min-height: calc(100vh - 67px);
 	width: 100%;
 	padding: 20px;
-	background: #f6f1e3;
+	background: var(--main-bg-color);
 	background-attachment: fixed;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -31,7 +42,52 @@
 	padding: 8px;
 }
 
-.dropdown-label{
-    margin-bottom: 10px;
-    color: white;
+.flex {
+	display: flex;
+}
+
+.pagination {
+    margin: 10px 0;
+}
+
+.pagination>li>a,
+.pagination>li>span {
+	color: var(--main-color);
+    background-color: transparent;
+	border: 0;
+}
+
+.pagination>li>a:focus,
+.pagination>li>a:hover,
+.pagination>li>span:focus,
+.pagination>li>span:hover {
+	z-index: 2;
+	cursor: pointer;
+	color: var(--main-hover-color);
+    background-color: transparent;
+}
+
+.pagination>.active>a,
+.pagination>.active>a:focus,
+.pagination>.active>a:hover,
+.pagination>.active>span,
+.pagination>.active>span:focus,
+.pagination>.active>span:hover {
+    z-index: 3;
+    color: #fff;
+    cursor: pointer;
+	background-color: transparent;
+}
+
+.pagination>.disabled>a,
+.pagination>.disabled>a:focus,
+.pagination>.disabled>a:hover,
+.pagination>.disabled>span,
+.pagination>.disabled>span:focus,
+.pagination>.disabled>span:hover,
+.pagination>.disabled>span>i:hover,
+.pagination>.disabled>a>i:hover {
+    color: #777;
+    cursor: not-allowed;
+    background-color: transparent;
 }

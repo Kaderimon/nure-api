@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import { Grid, Col, Row } from 'react-bootstrap';
 import { Switch , Route } from 'react-router-dom'
 import Top from '../../components/Top/Top';
 import Transport from '../../core/Requester';
-import core from '../../core/core';
 import './Main.css';
 import Index from '../../pages/Home/Home';
 import Groups from '../../pages/Groups/Groups';
@@ -30,7 +28,6 @@ class Main extends Component {
   }
 
   render() {
-    const showNav = this.state.showNav ? { left:0 } : {};
     return (
       <div className="App">
         <Top />

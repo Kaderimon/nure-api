@@ -1,7 +1,7 @@
 .App-header {
-	background-color: #222;
-	border-bottom: 1px solid dodgerblue;
-	color: purple;
+	background-color: var(--secondary-bg-color);
+	border-bottom: 1px solid var(--main-color);;
+	color: var(--main-color);
 	display: flex;
 	height: 67px;
 	justify-content: space-between;
@@ -11,6 +11,19 @@
 	width: 100%;
 	z-index: 1;
 }
+
+.App-header i:hover {
+	color: var(--main-hover-color);
+}
+
+.App-logo {
+	display: flex;
+}
+
+.App-logo>a {
+	margin-right: 23px;
+}
+
 .sync {
 	color: white;
     font-size: 12px;

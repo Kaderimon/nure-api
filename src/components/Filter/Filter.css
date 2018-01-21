@@ -1,0 +1,9 @@
+.filter {
+    background-color: var(--block-bg-color);
+    border: 1px solid var(--block-border-color);
+}
+
+.dropdown-label{
+    margin: 10px 0;
+    color: var(--main-title-color);
+}

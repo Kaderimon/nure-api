@@ -1,5 +1,4 @@
 import _ from 'lodash';
-import moment from 'moment';
 
 class Core {
   // return true if the value is [], {}, "", null, undefined

@@ -4,8 +4,6 @@ import { NavLink } from 'react-router-dom';
 import './Header.css';
 import core from '../../core/core';
 import Transport from '../../core/Requester';
-import Notify from '../../core/Notify';
-import _ from 'lodash';
 import { config } from '../../config/config.js';
 
 class Header extends Component {
@@ -33,11 +31,13 @@ class Header extends Component {
     const spin = this.state.update ? 'fa-spin' : '';
     return (
       <header className="App-header">
-        <i onClick={this.props.handleNavigation} className={`fa ${this.getNavClass()} fa-fw pointer`}></i>
-        <NavLink to='/'>
-          <img src={logo} style={{height: "60px", marginTop: "-20px", transform: 'rotate(-15deg)'}}/>
-        </NavLink>
-        <i onClick={this.update} className={`fa fa-refresh fa-fw pointer ${spin}`}></i>
+        <div className="App-logo">
+          <NavLink to='/'>
+            <img alt='NureApi' src={logo} style={{height: "60px", marginTop: "-20px", transform: 'rotate(-15deg)'}} />
+          </NavLink>
+          <i onClick={this.props.handleNavigation} className={`fa ${this.getNavClass()} fa-fw pointer`} />
+        </div>
+        <i onClick={this.update} className={`fa fa-refresh fa-fw pointer ${spin}`} />
       </header>
     );
   }
