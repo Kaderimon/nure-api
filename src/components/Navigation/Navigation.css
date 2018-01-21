@@ -1,6 +1,6 @@
 .App-nav {
     top: 67px;
-    background-color: #222;
+    background-color: #ffffff;
     height: calc(100% - 67px);
     left: -150px;
     position: fixed;
@@ -14,5 +14,6 @@
     padding: 20px;
 }
 .App-nav__item:hover {
-    opacity: 0.5;
+    border-color: #852826;
+    color: #852826;
 }

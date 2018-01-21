@@ -35,7 +35,7 @@ class Header extends Component {
       <header className="App-header">
         <i onClick={this.props.handleNavigation} className={`fa ${this.getNavClass()} fa-fw pointer`}></i>
         <NavLink to='/'>
-          <img src={logo} style={{height: "60px", marginTop: "-20px"}}/>
+          <img src={logo} style={{height: "60px", marginTop: "-20px", transform: 'rotate(-15deg)'}}/>
         </NavLink>
         <i onClick={this.update} className={`fa fa-refresh fa-fw pointer ${spin}`}></i>
       </header>
