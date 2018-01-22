@@ -1,7 +1,10 @@
-.item {
-  border: 1px solid;
+.items {
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.item {
   color: var(--main-color);
   margin: 5px;
   padding: 5px;

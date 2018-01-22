@@ -5,7 +5,9 @@
 	--main-color: #0076b1;
 	--main-hover-color: #890377;
 	--block-bg-color: #F9F6ED;
-    --block-border-color: #F2EBD7;
+	--block-border-color: #F2EBD7;
+	--block-bg2-color: #f1ead6;
+	--block-border2-color: #EBE1C7;
 }
 
 .App {

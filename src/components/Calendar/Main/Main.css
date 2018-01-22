@@ -1,5 +1,5 @@
 .schedule {
-    border-bottom: 1px solid dodgerblue; 
+    border-bottom: 1px solid var(--block-border2-color);
     min-height: 41px;
     display: flex;
     align-items: center;

@@ -20,8 +20,12 @@
 	display: flex;
 }
 
-.App-logo>a {
+.App-logo a {
 	margin-right: 23px;
+}
+
+.App-logo a:hover {
+	color: var(--main-hover-color);
 }
 
 .sync {

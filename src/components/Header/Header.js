@@ -5,6 +5,7 @@ import './Header.css';
 import core from '../../core/core';
 import Transport from '../../core/Requester';
 import { config } from '../../config/config.js';
+import Nav from '../Navigation/Navigation';
 
 class Header extends Component {
   constructor(props) {
@@ -21,6 +22,7 @@ class Header extends Component {
         update: true
       });
       Transport.post(`${config.apis.updater}${type}/${id}`).then((response)=>{
+        this.props.onServerUpdate();
         this.setState({
           update: false
         });
@@ -35,7 +37,7 @@ class Header extends Component {
           <NavLink to='/'>
             <img alt='NureApi' src={logo} style={{height: "60px", marginTop: "-20px", transform: 'rotate(-15deg)'}} />
           </NavLink>
-          <i onClick={this.props.handleNavigation} className={`fa ${this.getNavClass()} fa-fw pointer`} />
+          <Nav />
         </div>
         <i onClick={this.update} className={`fa fa-refresh fa-fw pointer ${spin}`} />
       </header>

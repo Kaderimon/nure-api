@@ -20,6 +20,8 @@ class Events extends Component {
     this.fetchEvents();
     this.fetchInfo();
   }
+  componentWillReceiveProps(nextProps) {
+  }
   async fetchEvents () {
     const response = await Transport.get(`${config.apis.events}${this.props.match.params.id}`);
     const sync = _.get(response, 'sync', 'Неизвестно')

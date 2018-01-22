@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Switch , Route } from 'react-router-dom'
-import Top from '../../components/Top/Top';
+import Header from '../../components/Header/Header';
 import Transport from '../../core/Requester';
 import './Main.css';
 import Index from '../../pages/Home/Home';
@@ -14,12 +14,17 @@ class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      faculties: []
+      faculties: [],
+      update: false
     }
   }
 
   componentDidMount() {
     this.fetchFaculties();
+  }
+
+  onServerUpdate = (status=true) => {
+    this.setState({update: status});
   }
 
   async fetchFaculties () {
@@ -30,14 +35,14 @@ class Main extends Component {
   render() {
     return (
       <div className="App">
-        <Top />
+        <Header onServerUpdate={this.onServerUpdate}/>
         <div className="App-main">
           <Switch>
               <Route exact path="/" component={Index}/>
               <Route exact path="/groups" component={(props) => <Groups {...props} faculties={this.state.faculties}/>}/>
               <Route exact path="/teachers" component={(props) => <Teachers {...props} faculties={this.state.faculties}/>}/>
-              <Route exact path="/groups/:id" component={Events}/>
-              <Route exact path="/teachers/:id" component={Events}/>
+              <Route exact path="/groups/:id" component={(props) => <Events {...props} />}/>
+              <Route exact path="/teachers/:id" component={(props) => <Events {...props} />}/>
               <Route component={NotFound}/>
           </Switch>
         </div>
@@ -47,6 +52,6 @@ class Main extends Component {
 }
 
 export default Main;
-        //<footer className="App-footer">
-        //  <p className="App-copy">Shupyliuk M. && Roslyakov I. && Usachev V.</p>
-        //</footer>
+//<footer className="App-footer">
+//  <p className="App-copy">Shupyliuk M. && Roslyakov I. && Usachev V.</p>
+//</footer>
