@@ -39,8 +39,8 @@ class Events extends Component {
   }
   render () {
     return (
-      <div className="groups">
-        <div className="page-header">
+      <div className="events">
+        <div className="col-xs-offset-1 col-xs-10 page-header">
             <h1 className="App-title">{this.state.name}</h1>
             <p style={{color: '#fff'}}>Последнее обновление: {this.state.sync}</p>
         </div>

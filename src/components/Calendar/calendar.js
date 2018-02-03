@@ -98,7 +98,7 @@ class Calendar extends Component {
   }
   render () {
     return (
-      <div className="calendar">
+      <div className="col-xs-offset-1 col-xs-10 calendar information-block">
         {this.renderModal()}
         <div className="c-control">
           <ButtonGroup>

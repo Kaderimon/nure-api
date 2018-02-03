@@ -71,7 +71,7 @@ class Groups extends Component {
     return (
       <div className="groups">
         <PageHead title="Группы" onChange={this.search} />
-        <div className="flex">
+        <div className="flex col-xs-12">
           <Filter 
             faculties={this.props.faculties}
             facultet={this.state.facultet}

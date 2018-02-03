@@ -1,7 +1,7 @@
 .App-header {
 	background-color: var(--secondary-bg-color);
-	border-bottom: 1px solid var(--main-color);;
-	color: var(--main-color);
+	border-bottom: 1px solid var(--main-header-color);;
+	color: var(--main-header-color);
 	display: flex;
 	height: 67px;
 	justify-content: space-between;
@@ -22,6 +22,10 @@
 
 .App-logo a {
 	margin-right: 23px;
+}
+
+.App-logo a>i {
+	margin-right: 5px;
 }
 
 .App-logo a:hover {

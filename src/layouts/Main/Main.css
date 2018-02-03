@@ -1,11 +1,15 @@
 :root {
-	--main-bg-color: #f6f1e3;
-	--secondary-bg-color: #ffffff;
+	--main-bg-color: #355C7D;  /* fallback for old browsers */
+	--main-bg-color: -webkit-linear-gradient(to bottom, #355C7D, #6C5B7B, #C06C84);  /* Chrome 10-25, Safari 5.1-6 */
+	--main-bg-color: linear-gradient(to bottom, #355C7D, #6C5B7B, #C06C84); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	
+	--secondary-bg-color: #20202A;
 	--main-title-color: #000000;
 	--main-color: #0076b1;
+	--main-header-color: #fefefe;
 	--main-hover-color: #890377;
-	--block-bg-color: #F9F6ED;
-	--block-border-color: #F2EBD7;
+	--block-bg-color: #fefefe;
+	--block-border-color: #f0f0f0;
 	--block-bg2-color: #f1ead6;
 	--block-border2-color: #EBE1C7;
 }
@@ -21,11 +25,9 @@
 }
   
 .App-main{
-	display: inline-block;
 	margin-top: 67px;
 	min-height: calc(100vh - 67px);
 	width: 100%;
-	padding: 20px;
 	background: var(--main-bg-color);
 	background-attachment: fixed;
 	background-repeat: no-repeat;
@@ -76,7 +78,7 @@
 .pagination>.active>span:focus,
 .pagination>.active>span:hover {
     z-index: 3;
-    color: #fff;
+	color: var(--main-title-color);
     cursor: pointer;
 	background-color: transparent;
 }

@@ -1,6 +1,8 @@
-.filter {
+.information-block {
     background-color: var(--block-bg-color);
     border: 1px solid var(--block-border-color);
+    border-radius: 5px;
+    box-shadow: 2px 2px 8px #232222;
 }
 
 .dropdown-label{

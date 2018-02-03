@@ -57,7 +57,7 @@ class FEtable extends Component {
 
   render () {
     return (
-        <div className="col-xs-offset-1 col-xs-7 FEtable">
+        <div className="information-block col-xs-offset-1 col-xs-6 FEtable">
           <div className="items">
             {this.renderGroups()}
           </div>

@@ -1,12 +1,17 @@
 .teachers .page-header,
 .groups .page-header{
     display: flex;
-    margin: 0;
     justify-content: space-between;
     align-items: center;
-    padding-bottom: 9px;
-    border-bottom: 1px solid;
-    padding: 20px;
+    border-bottom: 0;
+    margin-bottom: 20px;
+}
+.events .page-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+    border-bottom: 0;
     margin-bottom: 20px;
 }
 .search {

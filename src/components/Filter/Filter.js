@@ -13,7 +13,7 @@ class Filter extends Component {
     dep = dep.length > 0 ? dep : defaultDep;
 
     return (
-      <div className="filter col-xs-3">
+      <div className="information-block col-xs-offset-1 col-xs-3">
         <FormGroup controlId="formControlsSelect" className="col-xs-12">
           <ControlLabel className="dropdown-label">Выберите факультет</ControlLabel>
           <FormControl componentClass="select" placeholder="select" onChange={onFacultetSelect}>

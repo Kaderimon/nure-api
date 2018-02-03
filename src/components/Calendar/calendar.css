@@ -1,13 +1,9 @@
 .calendar{
-  width: 75%;
-  border: 1px solid var(--block-border2-color);
-  background: var(--block-bg2-color);
-  margin: 0 auto;
-  border-radius: 5px;
+  padding: 0;
 }
 .calendar .btn-default {
-  background-color: var(--block-bg2-color);
-  border-color: var(--block-border2-color);
+  background-color: var(--block-bg-color);
+  border: 1px solid var(--block-border-color);
 }
 .calendar div {
   padding-right: 0;
@@ -20,9 +16,7 @@
   margin: 10px 20px;
   padding: 0 20px;
 }
-.c-control__info {
-  color: #fff;
-}
+
 .c-table {
   margin-right: 0;
   margin-left: 0;
