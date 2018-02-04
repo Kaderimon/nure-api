@@ -8,9 +8,13 @@ import config from './config/config';
 import {routes, allowedMethods} from './routes/index.js';
 import { db } from './services/dbConnect';
 import cors from '@koa/cors';
+const fs = require('fs');
 const app = new Koa();
-const router = new Router().get('/', serve(__dirname + '/../build/index.html'));
+const router = new Router().get('/', async (ctx, next) => {
+  const indexHTML = fs.readFileSync(__dirname + '/public/index.html', 'utf-8');
 
+  ctx.body = indexHTML;
+})
 app.use(cors());
 app.use(logger());
 app.use(err);
