@@ -1,5 +1,5 @@
 //work with db
-import DataUpdater from '../services/dataupdater.js';
+import DataUpdater from '../services/dataUpdater.js';
 import { getFaculties,
     updateFacultet,
     setFacultet} from './faculties'
