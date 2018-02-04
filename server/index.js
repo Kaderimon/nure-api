@@ -11,7 +11,7 @@ import cors from '@koa/cors';
 const fs = require('fs');
 const app = new Koa();
 const router = new Router().get('/', async (ctx, next) => {
-  const indexHTML = fs.readFileSync(__dirname + '/public/index.html', 'utf-8');
+  const indexHTML = fs.readFileSync(__dirname + '/../build/index.html', 'utf-8');
 
   ctx.body = indexHTML;
 })
