@@ -46,6 +46,14 @@
 	padding: 8px;
 }
 
+.unknown {
+	display: flex;
+    align-items: center;
+    font-size: 5em;
+    justify-content: center;
+    height: calc(100vh - 67px);
+}
+
 .flex {
 	display: flex;
 }

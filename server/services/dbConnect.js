@@ -1,7 +1,7 @@
 import mangoose from 'mongoose';
 import config from '../config/config';
 
-mangoose.connect(`${config.dbAddress}:${config.dbPort}`, {useMongoClient: true});
+mangoose.connect(`${config.dbAddress}`, {useMongoClient: true});
 mangoose.Promise = global.Promise;
 
 export const db = mangoose.connection;
