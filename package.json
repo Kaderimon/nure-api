@@ -18,7 +18,20 @@
     "react-paginate": "^5.0.0",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
-    "react-scripts": "1.0.14"
+    "react-scripts": "1.0.14",
+    "boom": "^6.0.0",
+    "koa": "^2.3.0",
+    "koa-basic-auth": "^2.0.0",
+    "koa-body": "^2.5.0",
+    "koa-convert": "^1.2.0",
+    "koa-logger": "^3.1.0",
+    "koa-mount": "^3.0.0",
+    "koa-router": "^7.2.1",
+    "koa-session": "^5.5.0",
+    "koa-static": "^4.0.2",
+    "mongoose": "^4.12.2",
+    "node-fetch": "^1.7.3",
+    "thunkify": "^2.1.2"
   },
   "scripts": {
     "start": "react-scripts start",
