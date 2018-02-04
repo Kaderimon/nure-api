@@ -6,10 +6,12 @@ import Router from 'koa-router';
 import err from './middleware/error';
 import config from './config/config';
 import {routes, allowedMethods} from './routes/index.js';
-import { db } from './services/dbConnect'
+import { db } from './services/dbConnect';
+import cors from '@koa/cors';
 const app = new Koa();
 const router = new Router().get('/', serve(__dirname + '/../build/index.html'));
 
+app.use(cors());
 app.use(logger());
 app.use(err);
 
