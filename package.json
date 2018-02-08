@@ -10,7 +10,7 @@
     "babel-preset-stage-0": "^6.24.1",
     "babel-register": "^6.26.0",
     "boom": "^6.0.0",
-    "bootstrap": "^4.0.0",
+    "bootstrap": "^3.3.7",
     "font-awesome": "^4.7.0",
     "koa": "^2.3.0",
     "koa-basic-auth": "^2.0.0",

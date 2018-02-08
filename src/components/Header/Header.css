@@ -22,6 +22,7 @@
 
 .App-logo a {
 	margin-right: 23px;
+	color: var(--main-header-color);
 }
 
 .App-logo a>i {
