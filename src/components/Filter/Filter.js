@@ -8,7 +8,7 @@ class Filter extends Component {
     const {onFacultetSelect, onDepSelect, faculties, selector} = this.props;
     const facultet = _.find(faculties, {'id': Number(this.props.facultet)});
     let dep = _.get(facultet, selector, []);
-    const showSecondInput = this.props.facultet !== 'all';
+    const showSecondInput = this.props.facultet === 'all';
     const defaultDep =  [{ id:'all', short_name:'All' }]
     dep = dep.length > 0 ? dep : defaultDep;
 
@@ -21,9 +21,9 @@ class Filter extends Component {
             {_.sortBy(faculties, ['short_name']).map((fac,i) => <option key={`fac${i}`} value={fac.id}>{fac.short_name}</option>)}
           </FormControl>
         </FormGroup>
-        {showSecondInput && <FormGroup controlId="formControlsSelect" className="col-xs-12">
+        {<FormGroup controlId="formControlsSelect" className="col-xs-12">
           <ControlLabel className="dropdown-label">Выберите кафедру</ControlLabel>
-          <FormControl componentClass="select" placeholder="select" onChange={onDepSelect}>
+          <FormControl componentClass="select" placeholder="select" onChange={onDepSelect} disabled={showSecondInput}>
             {dep.map((dep,i) => <option key={`dep${i}`} value={dep.id}>{dep.short_name}</option>)}
           </FormControl>
         </FormGroup>}

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './Home.css';
 import core from '../../core/core';
+import { Col, Row, Button, ButtonGroup } from 'react-bootstrap';
+import banner from '../../bann-rus.png';
 
 class Home extends Component {
   componentDidMount() {
@@ -10,8 +12,18 @@ class Home extends Component {
   render() {
     return (
       <div className="App-intro">
-        <h1 className="App-title" style={{textAlign:'center', marginBottom:'50px'}}>Добро пожаловать!</h1>
-        <p style={{fontSize: 'larger',width: '50%', margin: '0 auto', color: 'white'}}>Задача “Расписание” предназначена для предоставления актуальной и своевременной информации о расписании учебного процесса университета. При использовании данного сервиса все пользователи могут получать расписание для академических групп, для потоков академических групп, а также расписание преподавателей (как выборочно так и по кафедрам в целом).</p>
+          <div className="col-xs-offset-1 col-xs-10">
+            <img src={banner} alt="Воруй смело, креативно" style={{width: '100%'}} />
+          </div>
+          <div className="col-xs-offset-1 col-xs-10 page-header">
+            <h1 className="App-title">Полезные ссылки</h1>
+          </div>
+          <Col xs={10} xsOffset={1}>
+            <ul className="flex links information-block">
+              <li><a href="http://nure.ua/stipendialnyj-rejting/" target="_blank">Стипендиальный рейтинг</a></li>
+              <li><a href="http://nure.ua/all_news/" target="_blank">Новости университета</a></li>
+            </ul>
+          </Col>       
       </div>
     );
   }

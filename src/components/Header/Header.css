@@ -3,7 +3,7 @@
 	border-bottom: 1px solid var(--main-header-color);;
 	color: var(--main-header-color);
 	display: flex;
-	height: 67px;
+	height: var(--main-header-height);
 	justify-content: space-between;
 	padding: 23px;
 	position: fixed;

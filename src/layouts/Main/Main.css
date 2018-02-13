@@ -12,6 +12,8 @@
 	--block-border-color: #f0f0f0;
 	--block-bg2-color: #f1ead6;
 	--block-border2-color: #EBE1C7;
+
+	--main-header-height: 67px;
 }
 
 body {
@@ -21,8 +23,19 @@ body {
     margin-top: 67px;
 }
 
+body h1,
+body .h1,
+body h2,
+body .h2,
+body h3,
+body .h3 {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
 .App {
 	text-align: center;
+	padding-top: var(--main-header-height);
 }
 
 .App-title {
@@ -32,7 +45,6 @@ body {
 }
   
 .App-main {
-	margin-top: 67px;
 	width: 100%;
 	text-align: center;
 }
@@ -60,47 +72,48 @@ body {
 	display: flex;
 }
 
-.pagination {
+.App-main .pagination {
     margin: 10px 0;
 }
 
-.pagination>li>a,
-.pagination>li>span {
+.App-main .pagination>li>a,
+.App-main .pagination>li>span {
 	color: var(--main-color);
     background-color: transparent;
 	border: 0;
+	margin-left: -7px;
 }
 
-.pagination>li>a:focus,
-.pagination>li>a:hover,
-.pagination>li>span:focus,
-.pagination>li>span:hover {
+.App-main .pagination>li>a:focus,
+.App-main .pagination>li>a:hover,
+.App-main .pagination>li>span:focus,
+.App-main .pagination>li>span:hover {
 	z-index: 2;
 	cursor: pointer;
 	color: var(--main-hover-color);
     background-color: transparent;
 }
 
-.pagination>.active>a,
-.pagination>.active>a:focus,
-.pagination>.active>a:hover,
-.pagination>.active>span,
-.pagination>.active>span:focus,
-.pagination>.active>span:hover {
+.App-main .pagination>.active>a,
+.App-main .pagination>.active>a:focus,
+.App-main .pagination>.active>a:hover,
+.App-main .pagination>.active>span,
+.App-main .pagination>.active>span:focus,
+.App-main .pagination>.active>span:hover {
     z-index: 3;
 	color: var(--main-title-color);
     cursor: pointer;
 	background-color: transparent;
 }
 
-.pagination>.disabled>a,
-.pagination>.disabled>a:focus,
-.pagination>.disabled>a:hover,
-.pagination>.disabled>span,
-.pagination>.disabled>span:focus,
-.pagination>.disabled>span:hover,
-.pagination>.disabled>span>i:hover,
-.pagination>.disabled>a>i:hover {
+.App-main .pagination>.disabled>a,
+.App-main .pagination>.disabled>a:focus,
+.App-main .pagination>.disabled>a:hover,
+.App-main .pagination>.disabled>span,
+.App-main .pagination>.disabled>span:focus,
+.App-main .pagination>.disabled>span:hover,
+.App-main .pagination>.disabled>span>i:hover,
+.App-main .pagination>.disabled>a>i:hover {
     color: #777;
     cursor: not-allowed;
     background-color: transparent;

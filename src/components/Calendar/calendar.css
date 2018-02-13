@@ -1,14 +1,17 @@
-.calendar{
+.calendar {
   padding: 0;
 }
+
 .calendar .btn-default {
   background-color: var(--block-bg-color);
   border: 1px solid var(--block-border-color);
 }
+
 .calendar div {
   padding-right: 0;
   padding-left: 0;
 }
+
 .c-control { 
   display: flex;
   justify-content: space-between;
@@ -23,6 +26,11 @@
   border-top: 1px solid var(--block-border2-color);
   padding-bottom: 10px;
 }
+
 .c-modal-row {
   margin-bottom: 10px;
+}
+
+.c-modal-row h3 {
+  font-size: 19px;
 }
