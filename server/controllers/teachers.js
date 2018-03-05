@@ -1,7 +1,13 @@
 import Teacher from '../models/teacher';
+import DefaultError from '../errors/Default';
 
 export async function getTeacher(id) {
-  return await Teacher.findOne({id: id});
+  return await Teacher.findOne({id: id}).then(function(teacher) {
+    if(!teacher) {
+      throw new DefaultError('Преподаватель не найден', 404);
+    }
+    return teacher;
+  });
 }
 export async function getTeachers() {
   return await Teacher.find();

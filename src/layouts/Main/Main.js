@@ -41,8 +41,8 @@ class Main extends Component {
               <Route exact path="/" component={Index}/>
               <Route exact path="/groups" component={(props) => <Groups {...props} faculties={this.state.faculties}/>}/>
               <Route exact path="/teachers" component={(props) => <Teachers {...props} faculties={this.state.faculties}/>}/>
-              <Route exact path="/groups/:id" component={(props) => <Events {...props} />}/>
-              <Route exact path="/teachers/:id" component={(props) => <Events {...props} />}/>
+              <Route exact path="/groups/:id" component={Events}/>
+              <Route exact path="/teachers/:id" component={Events}/>
               <Route component={NotFound}/>
           </Switch>
         </div>
@@ -53,5 +53,5 @@ class Main extends Component {
 
 export default Main;
 //<footer className="App-footer">
-//  <p className="App-copy">Shupyliuk M. && Roslyakov I. && Usachev V.</p>
+//  <p className="App-copy">Shupyliuk M.</p>
 //</footer>

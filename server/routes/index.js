@@ -9,13 +9,17 @@ import { updateDB,
   getTeacher,
   getGroups,
   getGroup,
-  teacherEvents,
-  groupEvents,
+  updateTeacherEvents,
+  updateGroupEvents,
   getEvent,
   updateGroups,
   updateTeachers,
   getTeachersByDepartment,
-  getGroupsByDirection } from '../controllers/index.js'
+  getGroupsByDirection, 
+  getAuditories,
+  getAuditory,
+  updateAuditories,
+  updateAuditoryEvents} from '../controllers/index.js'
   
 const router = new Router({
   prefix: '/api'
@@ -73,6 +77,22 @@ router
   .post('/groups/:id', koaBody, async (ctx, next) => {
     ctx.status = 201;
     ctx.body = await groupEvents(ctx.params.id);
+  })
+  .get('/auditories', async (ctx, next) => {
+    ctx.body = await getAuditories();
+    ctx.status = 201;
+  })
+  .get('/auditories/:id', async (ctx, next) => {
+    ctx.status = 201;
+    ctx.body = await getAuditory(ctx.params.id);
+  })
+  .post('/auditories', async (ctx, next) => {
+    ctx.body = await updateAuditories();
+    ctx.status = 201;
+  })
+  .post('/auditories/:id', koaBody, async (ctx, next) => {
+    ctx.status = 201;
+    ctx.body = await updateAuditoryEvents(ctx.params.id);
   })
   .get('/events/:id', async (ctx, next) => {
     ctx.status = 201;

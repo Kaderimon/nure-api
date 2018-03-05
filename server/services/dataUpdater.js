@@ -1,9 +1,10 @@
 import fetch from 'node-fetch';
 import _ from "lodash";
-import { setTeachers, updateTeacher, updateGroup, updateFacultet, updateEvent } from '../controllers/index.js'
+import { updateTeacher, updateGroup, updateFacultet, updateEvent, updateAuditory } from '../controllers/index.js'
 import config from '../config/config'
 import moment from 'moment';
 import 'moment/locale/ru';
+import DefaultError from '../errors/Default';
 
 moment.locale('ru');
 class DataUpdater {
@@ -13,7 +14,7 @@ class DataUpdater {
             await DataUpdater.groups();
             await DataUpdater.faculties();            
         } catch (err) {
-            throw new Error(err);
+            throw new DefaultError(err);
         }
         return {
             message: 'Success',
@@ -34,11 +35,11 @@ class DataUpdater {
             array[index].departments = _.get(departments[index], 'faculty.departments', []);
         });
         try {
-            facultiesArray.map(async item => {
+            await Promise.all(facultiesArray.map(async item => {
                 return await updateFacultet(item);
-            });
+            }));
         } catch (err) {
-            throw new Error(err);
+            throw new DefaultError(err);
         }
         return {
             message: 'База факультетов успешно обновлена',
@@ -59,11 +60,11 @@ class DataUpdater {
             })
         })
         try {
-            teachersData.map(async item => {
+            await Promise.all(teachersData.map(async item => {
                 return await updateTeacher(item);
-            });
+            }));
         } catch (err) {
-            throw new Error(err);
+            throw new DefaultError(err);
         }
         return {
             message: 'База преподавателей успешно обновлена',
@@ -107,14 +108,33 @@ class DataUpdater {
             });
         })
         try {
-            groupsData.map(async item => {
+            await Promise.all(groupsData.map(async item => {
                 return await updateGroup(item);
-            });
+            }));
         } catch (err) {
-            throw new Error(err);
+            throw new DefaultError(err);
         }
         return {
             message: 'База групп успешно обновлена',
+            sync: moment().format('llll')
+        }
+    }
+    static async auditories () {
+        const auditories = [];
+        const data = await fetch(`${config.apiSource}/P_API_AUDITORIES_JSON`).then(r => r.json());
+        let buildings = _.get(data, 'university.buildings', []);
+        buildings.forEach(building => {
+            auditories.push(...building.auditories);
+        });
+        try {
+            auditories.map(async item => {
+                return await updateAuditory(item);
+            });
+        } catch (err) {
+            throw new DefaultError(err);
+        }
+        return {
+            message: 'База аудиторий успешно обновлена',
             sync: moment().format('llll')
         }
     }

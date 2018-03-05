@@ -7,7 +7,6 @@ async function handleErrors (response) {
     Notify.error(res.message);
     throw new Error(res.message);
   } else {
-
     return res;    
   }
 }
