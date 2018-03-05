@@ -5,6 +5,7 @@ export const config = {
         groups:`${server}/api/groups`,
         teachers:`${server}/api/teachers`,
         faculties: `${server}/api/faculties`,
+        auditories: `${server}/api/auditories`,
         events: `${server}/api/events/`,
         updater: `${server}/api/`
     }

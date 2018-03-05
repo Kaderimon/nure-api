@@ -9,11 +9,15 @@ class Nav extends Component {
       <nav className="App-nav" style={this.props.style}>
         <NavLink to='/teachers'>
           <i className="fa fa-graduation-cap"></i>
-          Преподаватель
+          Преподаватели
         </NavLink>
         <NavLink to='/groups'>
           <i className="fa fa-users"></i>
-          Группа
+          Группы
+        </NavLink>
+        <NavLink to='/auditories'>
+          <i className="fa fa-slideshare"></i>
+          Аудитории
         </NavLink>
       </nav>
     );

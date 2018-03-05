@@ -56,7 +56,7 @@ router
   })
   .post('/teachers/:id', koaBody, async (ctx, next) => {
     ctx.status = 201;
-    ctx.body = await teacherEvents(ctx.params.id);
+    ctx.body = await updateTeacherEvents(ctx.params.id);
   })
   .get('/groups', async (ctx, next) => {
     ctx.status = 201;
@@ -76,7 +76,7 @@ router
   })
   .post('/groups/:id', koaBody, async (ctx, next) => {
     ctx.status = 201;
-    ctx.body = await groupEvents(ctx.params.id);
+    ctx.body = await updateGroupEvents(ctx.params.id);
   })
   .get('/auditories', async (ctx, next) => {
     ctx.body = await getAuditories();

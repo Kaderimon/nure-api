@@ -1,12 +1,13 @@
 .teachers .page-header,
-.groups .page-header{
+.groups .page-header,
+.auditories .page-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     border-bottom: 0;
     margin-bottom: 20px;
 }
-.events .page-header{
+.events .page-header {
     display: flex;
     justify-content: space-between;
     align-items: center;

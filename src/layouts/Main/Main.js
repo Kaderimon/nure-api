@@ -7,6 +7,7 @@ import Index from '../../pages/Home/Home';
 import Groups from '../../pages/Groups/Groups';
 import Teachers from '../../pages/Teachers/Teachers';
 import Events from '../../pages/Events/Events';
+import Auditories from '../../pages/Auditories/Auditories';
 import NotFound from '../../pages/NotFound/404';
 import { config } from '../../config/config.js';
 
@@ -41,6 +42,8 @@ class Main extends Component {
               <Route exact path="/" component={Index}/>
               <Route exact path="/groups" component={(props) => <Groups {...props} faculties={this.state.faculties}/>}/>
               <Route exact path="/teachers" component={(props) => <Teachers {...props} faculties={this.state.faculties}/>}/>
+              <Route exact path="/auditories" component={Auditories}/>
+              <Route exact path="/auditories/:id" component={Events}/>
               <Route exact path="/groups/:id" component={Events}/>
               <Route exact path="/teachers/:id" component={Events}/>
               <Route component={NotFound}/>
