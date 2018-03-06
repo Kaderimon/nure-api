@@ -56,7 +56,7 @@ router
     ctx.body = await updateTeachers();
     ctx.status = 201;
   })
-  .post('/teachers/:id', koaBody, async (ctx, next) => {
+  .post('/teachers/:id', async (ctx, next) => {
     ctx.status = 201;
     ctx.body = await updateTeacherEvents(ctx.params.id);
   })
@@ -76,7 +76,7 @@ router
     ctx.status = 201;
     ctx.body = await updateGroups();
   })
-  .post('/groups/:id', koaBody, async (ctx, next) => {
+  .post('/groups/:id', async (ctx, next) => {
     ctx.status = 201;
     ctx.body = await updateGroupEvents(ctx.params.id);
   })
@@ -92,12 +92,12 @@ router
     ctx.body = await updateAuditories();
     ctx.status = 201;
   })
-  .post('/auditories/:id', koaBody, async (ctx, next) => {
+  .post('/auditories/:id', async (ctx, next) => {
     ctx.status = 201;
     ctx.body = await updateAuditoryEvents(ctx.params.id);
   })
   .post('/findFreeAuditory', koaBody, async (ctx, next) => {
-    ctx.body = await findFreeAuditory(moment().format());
+    ctx.body = await findFreeAuditory(moment(ctx.request.body.date));
     ctx.status = 201;
   })
   .get('/events/:id', async (ctx, next) => {

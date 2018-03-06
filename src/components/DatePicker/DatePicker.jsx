@@ -2,36 +2,29 @@ import React, { Component } from 'react';
 import DateTime from 'react-datetime';
 import moment from "moment";
 import "react-datetime/css/react-datetime.css";
+import { Button } from "react-bootstrap";
 
 class DatePicker extends Component {
   constructor (props) {
     super(props);
     this.state = {
-      show: false,
       configuration: {
         onChange: this.props.change,
-        input: false,
-        timeConstraints: { hours: { min: 7, max: 18, step: 1 } },
-        defaultValue: moment()
+        icon: false,
+        timeConstraints: { hours: { min: 7, max: 18} },
+        defaultValue: moment().hours(7).minutes(45)
       }
     }
   }
-  close = () => {
-    this.setState({ show: false });
+  renderInput( props, openCalendar, closeCalendar ){
+    return <Button onClick={openCalendar}>
+      <i className="fa fa-calendar"></i>
+    </Button>
   }
-  open = () => { 
-    this.setState({ show: true });
-  }
-  help = () => {
-    this.setState({ show: !this.state.show })
-  }
+
   render () {
-    return (
-      <div>
-        <button onClick={this.help}><i className="fa fa-calendar"></i></button>
-        <DateTime open={this.state.show} {...this.state.configuration} {...this.props.configuration}/>
-      </div>
-    );
+    const icon = this.props.conf ? this.props.conf.icon : this.state.icon;
+    return <DateTime renderInput={ icon ? this.renderInput : null} {...this.state.configuration} {...this.props.conf}/>
   }
 }
 

@@ -55,8 +55,11 @@ class Auditories extends Component {
             data={this.state.search}
             root={'auditories'}
             history={this.props.history}/>
-          <AuditoryFinder/>
         </div>
+        <div className="col-xs-offset-1 col-xs-10 page-header">
+            <h1 className="App-title">Поиск свободной аудитории</h1>
+        </div>
+        <AuditoryFinder/>
       </div>
     );
   }

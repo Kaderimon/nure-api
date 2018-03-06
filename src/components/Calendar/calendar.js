@@ -7,6 +7,7 @@ import './calendar.css';
 import 'moment/locale/ru';
 import { Modal } from 'react-bootstrap';
 import _ from 'lodash';
+import DatePicker from '../DatePicker/DatePicker';
 
 moment.locale('ru');
 class Calendar extends Component {
@@ -26,24 +27,28 @@ class Calendar extends Component {
     this.setState({ showModal: false });
   }
   open = (data) => () => { this.setState({ showModal: true, modalData: data}) }
-  nextWeek = (e) => {
-    this.state.currentWeek++;
-    this.state.weekRange = `${moment().week(this.state.currentWeek).day(1).format('D MMMM')} - ${moment().week(this.state.currentWeek).day(7).format('D MMMM')}`;
-    this.setState(this.state);
-  }
-  previousWeek = (e) => {
-    this.state.currentWeek--;
-    this.state.weekRange = `${moment().week(this.state.currentWeek).day(1).format('D MMMM')} - ${moment().week(this.state.currentWeek).day(7).format('D MMMM')}`;
-    this.setState(this.state);
+  nextWeek = (operator = true) => (e) => {
+    const currentWeek = operator ? this.state.currentWeek + 1 : this.state.currentWeek - 1;
+    this.setState({
+      currentWeek: currentWeek,
+      weekRange: this.calculateWeekRange(currentWeek)
+    });
   }
   currentWeek = (e) => {
     const currentWeek = moment().week();
-    const weekRange = `${moment().week(currentWeek).day(1).format('D MMMM')}-${moment().week(currentWeek).day(7).format('D MMMM')}`;
     this.setState({
       currentWeek: currentWeek,
-      weekRange: weekRange
+      weekRange: this.calculateWeekRange(currentWeek)
     });
   }
+  datePickerWeek = (date) => {
+    const currentWeek = date.week();
+    this.setState({
+      currentWeek: currentWeek,
+      weekRange: this.calculateWeekRange(currentWeek)
+    });
+  }
+  calculateWeekRange = (currentWeek) => `${moment().week(currentWeek).day(1).format('D MMMM')}-${moment().week(currentWeek).day(7).format('D MMMM')}`;
   filterByDate = (events) => {
     return events.filter(event => {
       const time = moment(event.start_time);
@@ -102,10 +107,11 @@ class Calendar extends Component {
         {this.renderModal()}
         <div className="c-control">
           <ButtonGroup>
-            <Button onClick={this.previousWeek}><i className="fa fa-arrow-left fa-fw"></i></Button> 
+            <Button onClick={this.nextWeek(false)}><i className="fa fa-arrow-left fa-fw"></i></Button> 
             <Button onClick={this.currentWeek}><i className="fa fa-dot-circle-o fa-fw"></i></Button>
-            <Button onClick={this.nextWeek}><i className="fa fa-arrow-right fa-fw"></i></Button>
+            <Button onClick={this.nextWeek(true)}><i className="fa fa-arrow-right fa-fw"></i></Button>
           </ButtonGroup>
+          <DatePicker change={this.datePickerWeek} conf={{icon: true}}/>
           <div className="c-control__info">
             {this.state.weekRange.toString()}
           </div>

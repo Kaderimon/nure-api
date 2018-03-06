@@ -28,7 +28,7 @@ export default class Transport {
       headers: {
         'Content-type': 'application/json; charset=UTF-8'
       },
-      body
+      body: JSON.stringify(body)
     }).then(handleErrors)
     .then(response => {Notify.success(_.get(response, 'message', 'Успех')); return response;})
     .catch(error => { console.log(error) });

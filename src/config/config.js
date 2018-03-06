@@ -6,6 +6,7 @@ export const config = {
         teachers:`${server}/api/teachers`,
         faculties: `${server}/api/faculties`,
         auditories: `${server}/api/auditories`,
+        findFreeAuditory: `${server}/api/findFreeAuditory`,
         events: `${server}/api/events/`,
         updater: `${server}/api/`
     }

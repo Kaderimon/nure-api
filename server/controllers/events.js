@@ -22,16 +22,17 @@ export async function updateEvent(target) {
     return getEvent(target.id);
   });
 }
-export async function findFreeAuditory(date) {
-  const searchingAuditoryTime = Date(date);
+export async function findFreeAuditory(searchingAuditoryTime) {
   const bookedAuditories = await EventModel.find({
     target: 'auditory',
     events: {
-      start_time: {
-        $gte: searchingAuditoryTime
-      },
-      end_time: {
-        $lte: searchingAuditoryTime
+      $elemMatch: {
+        start_time: {
+          $lte: searchingAuditoryTime
+        },
+        end_time: {
+          $gte: searchingAuditoryTime
+        }
       }
     }
   });

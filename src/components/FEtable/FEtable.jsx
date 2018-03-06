@@ -55,11 +55,14 @@ class FEtable extends Component {
     return <Item empty={true} />;
   }
 
+  renderSpinner () {
+    return <i className="fa fa-spinner fa-spin"></i>;
+  }
   render () {
     return (
         <div className="information-block col-xs-offset-1 col-xs-6 FEtable">
           <div className="items">
-            {this.renderGroups()}
+            {this.props.isDataRequested ? this.renderSpinner() : this.renderGroups()}
           </div>
           <ReactPaginate previousLabel={<i className="fa fa-arrow-left pointer"></i>}
                         nextLabel={<i className="fa fa-arrow-right pointer"></i>}
