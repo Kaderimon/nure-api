@@ -5,7 +5,7 @@ import { getFaculties,
     setFacultet} from './faculties'
 import { getGroups, getGroup, setGroup, updateGroup, getGroupsByDirection } from './groups';
 import { getTeachers, getTeacher, setTeachers, updateTeacher, getTeachersByDepartment } from './teachers';
-import { updateEvent, getEvent } from './events';
+import { updateEvent, getEvent, findFreeAuditory } from './events';
 import { getAuditories, getAuditoriesByShortName, setAuditory, updateAuditory, getAuditory } from './auditories.js';
 
 export function updateDB() {
@@ -51,4 +51,5 @@ export { getFaculties,
     getAuditory,
     getAuditoriesByShortName,
     setAuditory,
-    updateAuditory };
+    updateAuditory,
+    findFreeAuditory };

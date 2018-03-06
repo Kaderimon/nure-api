@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Transport from '../../core/Requester';
 import PageHead from '../../components/PageHead/PageHead';
 import FEtable from '../../components/FEtable/FEtable';
+import AuditoryFinder from '../../components/AuditoryFinder/AuditoryFinder';
 import { config } from '../../config/config.js';
 import _ from 'lodash';
 import core from '../../core/core';
@@ -54,6 +55,7 @@ class Auditories extends Component {
             data={this.state.search}
             root={'auditories'}
             history={this.props.history}/>
+          <AuditoryFinder/>
         </div>
       </div>
     );

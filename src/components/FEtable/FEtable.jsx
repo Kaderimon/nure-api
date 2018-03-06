@@ -44,7 +44,7 @@ class FEtable extends Component {
       return this.state.data.slice(quickMath, quickMath+perPage).map( (val, i) => {
         const onNav = e => {
           e.preventDefault();
-          core.saveLocal('event', {id:val.id, name: val.short_name, type: this.state.root}, true);
+          core.saveLocal('event', {id:val.id, name: val.short_name || val.name, type: this.state.root}, true);
           this.props.history.push(`/${this.state.root}/${val.id}`);
         };
         return <NavLink key={`item${i}`} onClick={onNav} to={`/${this.state.root}/${val.id}`}>

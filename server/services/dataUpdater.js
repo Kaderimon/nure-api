@@ -74,19 +74,20 @@ class DataUpdater {
     static async events (id, target) {
         const data = await fetch(`${config.apiSource}/P_API_EVENTS_${target}_JSON?p_id_${target}=${id}`)
             .then(r => r.json());
-        const events = _.get(data, 'events', []);
-        events.forEach((item, index, arr) => {
-            const groups = item.groups.map(i => _.find(_.get(data, 'groups', []), {'id': i}));
-            const teachers = item.teachers.map(i => _.find(_.get(data, 'teachers', []), {'id': i}));
-            const type = _.find(_.get(data, 'types', []), {'id': item.type});
-            const subject = _.find(_.get(data, 'subjects', []), {'id': item.subject_id});
-            arr[index].groups = groups;
-            arr[index].teachers = teachers;
-            arr[index].type = type;
-            arr[index].subject = subject;
-            delete arr[index].subject_id;
+        let events = _.get(data, 'events', []);
+        events = events.map((item) => {
+            const event = Object.assign({}, item, { 
+                groups: item.groups.map(i => _.find(_.get(data, 'groups', []), {'id': i})),
+                teachers: item.teachers.map(i => _.find(_.get(data, 'teachers', []), {'id': i})),
+                type: _.find(_.get(data, 'types', []), {'id': item.type}),
+                subject: _.find(_.get(data, 'subjects', []), {'id': item.subject_id}),
+                end_time: moment(1970).seconds(item['end_time']),
+                start_time: moment(1970).seconds(item['start_time'])
+            });
+            delete event.subject_id;
+            return event;
         });
-        const eventData = { id, events, sync: moment().format('llll')};
+        const eventData = { id, events, sync: moment().format('llll'), target};
         return updateEvent(eventData);
     }
     static async groups () {

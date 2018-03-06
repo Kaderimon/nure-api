@@ -19,7 +19,9 @@ import { updateDB,
   getAuditories,
   getAuditory,
   updateAuditories,
-  updateAuditoryEvents} from '../controllers/index.js'
+  updateAuditoryEvents,
+  findFreeAuditory} from '../controllers/index.js'
+import moment from 'moment';
   
 const router = new Router({
   prefix: '/api'
@@ -93,6 +95,10 @@ router
   .post('/auditories/:id', koaBody, async (ctx, next) => {
     ctx.status = 201;
     ctx.body = await updateAuditoryEvents(ctx.params.id);
+  })
+  .post('/findFreeAuditory', koaBody, async (ctx, next) => {
+    ctx.body = await findFreeAuditory(moment().format());
+    ctx.status = 201;
   })
   .get('/events/:id', async (ctx, next) => {
     ctx.status = 201;

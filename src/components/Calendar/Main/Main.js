@@ -6,13 +6,13 @@ import { workHours, daysOfWeek, lessonColor } from '../../../config/constants';
 import './Main.css';
 
 class Main extends Component {
-  renderLessons(data, i) {
+  renderLessons(data, pair) {
     return daysOfWeek.map((day,dayNumber) => {
       let lessonColorToSet = "";
       let modalData = null;
       const lessons = data.map(lesson => {
-        const lessonDay = moment(1970).seconds(lesson.start_time).day();
-        if ( lessonDay === dayNumber+1 && lesson.number_pair === i+1 ) {
+        const lessonDay = moment(lesson.start_time).day();
+        if ( lessonDay === dayNumber+1 && lesson.number_pair === pair+1 ) {
           lessonColorToSet = lessonColor[_.get(lesson, "type.id_base", "default")];
           modalData = { ...lesson }
           return <div>

@@ -27,6 +27,7 @@
     "node-fetch": "^1.7.3",
     "react": "^16.0.0",
     "react-bootstrap": "^0.31.3",
+    "react-datetime": "^2.14.0",
     "react-dom": "^16.0.0",
     "react-onclickoutside": "^6.7.0",
     "react-paginate": "^5.0.0",

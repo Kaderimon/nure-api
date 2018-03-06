@@ -46,7 +46,7 @@ class Calendar extends Component {
   }
   filterByDate = (events) => {
     return events.filter(event => {
-      const time = moment(1970).seconds(event.start_time);
+      const time = moment(event.start_time);
       const currentWeek = moment().week(this.state.currentWeek)
       return time.isSame(currentWeek, 'week') 
     });

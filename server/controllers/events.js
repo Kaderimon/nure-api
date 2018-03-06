@@ -1,5 +1,7 @@
 import EventModel from '../models/event';
 import DefaultError from '../errors/Default';
+import _ from "lodash";
+import { getAuditories } from '.';
 
 export async function getEvent(id) {
   return await EventModel.findOne({id: id}).then(function(user) {
@@ -19,4 +21,20 @@ export async function updateEvent(target) {
     }
     return getEvent(target.id);
   });
+}
+export async function findFreeAuditory(date) {
+  const searchingAuditoryTime = Date(date);
+  const bookedAuditories = await EventModel.find({
+    target: 'auditory',
+    events: {
+      start_time: {
+        $gte: searchingAuditoryTime
+      },
+      end_time: {
+        $lte: searchingAuditoryTime
+      }
+    }
+  });
+  const allAuditories = await getAuditories();
+  return _.differenceWith(allAuditories, bookedAuditories, (arrVal, otherVal) => arrVal.short_name === otherVal.events[0].auditory);
 }
