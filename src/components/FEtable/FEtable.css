@@ -5,3 +5,17 @@
     align-items: center;
     justify-content: space-between;
 }
+.perPagePicker {
+    width: 10%;
+    min-width: 50px;
+}
+.pagination-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    border-top: 1px solid var(--main-color)
+}
+
+.pagination-container .form-group {
+    margin-bottom: 0;
+}

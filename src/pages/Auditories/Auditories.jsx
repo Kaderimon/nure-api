@@ -59,7 +59,7 @@ class Auditories extends Component {
         <div className="col-xs-offset-1 col-xs-10 page-header">
             <h1 className="App-title">Поиск свободной аудитории</h1>
         </div>
-        <AuditoryFinder/>
+        <AuditoryFinder history={this.props.history}/>
       </div>
     );
   }

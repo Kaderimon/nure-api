@@ -5,6 +5,7 @@ import Item from '../../components/Item/Item';
 import _ from 'lodash';
 import ReactPaginate from 'react-paginate';
 import './FEtable.css'
+import PerPagePicker from "./perPagePicker/perPagePicker";
 
 class FEtable extends Component {
   constructor (props) {
@@ -36,6 +37,11 @@ class FEtable extends Component {
     });
   }
 
+  handlePerPageChange = (perPage) => {
+    const { data } = this.state;
+    this.setState({ perPage, pageCount: Math.ceil(data.length/perPage) });
+  }
+
   renderGroups () {
     const length = _.get(this.state, 'data.length', 0);
     const { currentPage, perPage } = this.state;
@@ -64,17 +70,20 @@ class FEtable extends Component {
           <div className="items">
             {this.props.isDataRequested ? this.renderSpinner() : this.renderGroups()}
           </div>
-          <ReactPaginate previousLabel={<i className="fa fa-arrow-left pointer"></i>}
-                        nextLabel={<i className="fa fa-arrow-right pointer"></i>}
-                        breakLabel={<a href=""><i className="fa fa-ellipsis-h" aria-hidden="true"></i></a>}
-                        breakClassName={"break-me"}
-                        pageCount={this.state.pageCount}
-                        marginPagesDisplayed={2}
-                        pageRangeDisplayed={3}
-                        onPageChange={this.handlePageChange}
-                        containerClassName={"pagination"}
-                        subContainerClassName={"pages pagination"}
-                        activeClassName={"active"} />
+          <div className="pagination-container">
+            <ReactPaginate previousLabel={<i className="fa fa-arrow-left pointer"></i>}
+                          nextLabel={<i className="fa fa-arrow-right pointer"></i>}
+                          breakLabel={<a href=""><i className="fa fa-ellipsis-h" aria-hidden="true"></i></a>}
+                          breakClassName={"break-me"}
+                          pageCount={this.state.pageCount}
+                          marginPagesDisplayed={2}
+                          pageRangeDisplayed={3}
+                          onPageChange={this.handlePageChange}
+                          containerClassName={"pagination"}
+                          subContainerClassName={"pages pagination"}
+                          activeClassName={"active"} />
+            <PerPagePicker onPerPageChange={this.handlePerPageChange}/>
+          </div>
         </div>
     );
   }
