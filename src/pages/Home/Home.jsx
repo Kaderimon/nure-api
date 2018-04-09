@@ -20,8 +20,8 @@ class Home extends Component {
           </div>
           <Col xs={10} xsOffset={1}>
             <ul className="flex links information-block">
-              <li><a href="http://nure.ua/stipendialnyj-rejting/" target="_blank">Стипендиальный рейтинг</a></li>
-              <li><a href="http://nure.ua/all_news/" target="_blank">Новости университета</a></li>
+              <li><a href="http://nure.ua/stipendialnyj-rejting/" rel="noopener noreferrer" target="_blank">Стипендиальный рейтинг</a></li>
+              <li><a href="http://nure.ua/all_news/" rel="noopener noreferrer" target="_blank">Новости университета</a></li>
             </ul>
           </Col>       
       </div>

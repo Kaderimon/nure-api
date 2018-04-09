@@ -24,13 +24,21 @@
   margin-right: 0;
   margin-left: 0;
   border-top: 1px solid var(--block-border2-color);
-  padding-bottom: 10px;
 }
-
+.c-table.list{
+  padding: 0 20px;
+  padding-top: 10px;
+  border-bottom: 1px solid var(--block-border2-color);
+}
 .c-modal-row {
   margin-bottom: 10px;
 }
 
 .c-modal-row h3 {
   font-size: 19px;
+}
+.c-control__info{
+  padding: 0 20px;
+  margin: 5px 20px;
+  text-align: right;
 }

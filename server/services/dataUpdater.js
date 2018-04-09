@@ -5,6 +5,7 @@ import config from '../config/config'
 import moment from 'moment';
 import 'moment/locale/ru';
 import DefaultError from '../errors/Default';
+import { eventLessonCounter } from '../utils/Utils.js';
 
 moment.locale('ru');
 class DataUpdater {
@@ -75,14 +76,17 @@ class DataUpdater {
         const data = await fetch(`${config.apiSource}/P_API_EVENTS_${target}_JSON?p_id_${target}=${id}`)
             .then(r => r.json());
         let events = _.get(data, 'events', []);
+        const subjects = {};
         events = events.map((item) => {
+            const lesson_number = eventLessonCounter(subjects, item);
             const event = Object.assign({}, item, { 
                 groups: item.groups.map(i => _.find(_.get(data, 'groups', []), {'id': i})),
                 teachers: item.teachers.map(i => _.find(_.get(data, 'teachers', []), {'id': i})),
                 type: _.find(_.get(data, 'types', []), {'id': item.type}),
                 subject: _.find(_.get(data, 'subjects', []), {'id': item.subject_id}),
                 end_time: moment(1970).seconds(item['end_time']),
-                start_time: moment(1970).seconds(item['start_time'])
+                start_time: moment(1970).seconds(item['start_time']),
+                lesson_number
             });
             delete event.subject_id;
             return event;

@@ -11,7 +11,8 @@ const EventSchema = new Schema({
         number_pair: Number,
         auditory: String,
         teachers: Array,
-        groups: Array
+        groups: Array,
+        lesson_number: Number
     }],
     sync: String,
     target: String
