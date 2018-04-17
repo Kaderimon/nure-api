@@ -37,8 +37,16 @@
 .c-modal-row h3 {
   font-size: 19px;
 }
-.c-control__info{
+.c-control__info {
   padding: 0 20px;
   margin: 5px 20px;
   text-align: right;
+}
+.c-filter {
+  float: left;
+}
+
+.c-filter .rdtPicker {
+  width: 200px;
+  right: 45px;
 }

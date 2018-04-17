@@ -9,6 +9,7 @@ import 'moment/locale/ru';
 import { Modal } from 'react-bootstrap';
 import _ from 'lodash';
 import DatePicker from '../DatePicker/DatePicker';
+import FilterButton from './Filter/Filter';
 import { CSVLink } from 'react-csv';
 
 moment.locale('ru');
@@ -28,17 +29,15 @@ class Calendar extends Component {
       modalData: {},
       data: props.data || [],
       displayType: 'list',
-      events: []
+      events: [],
+      listData: []
     }
   }
   componentDidMount() {
     this.currentWeek();
   }
   componentWillReceiveProps(props) {
-    this.setState({
-      data: this.filterByDate(props.data, this.state.selectedWeek),
-      events: this.convertData(props.data)
-    });
+    this.onInitialSelect(props);
   }
   close = () => {
     this.setState({ showModal: false });
@@ -76,6 +75,12 @@ class Calendar extends Component {
       return time.isSame(selectedWeek, 'week') 
     });
   }
+  filterList = (events, {subjectId, typeId, groupId}) => {
+    return events.filter(event => {
+      const isGroupHere = _.isUndefined(_.find(event.groups, { 'id': Number(groupId) }))
+      return event.subject.id === Number(subjectId) && event.type.id === Number(typeId) && !isGroupHere
+    });
+  }
   convertData = (events) => {
     return events.map(event => {
       const { end_time, start_time, groups = [], auditory, type, subject, teachers } = event;
@@ -95,6 +100,19 @@ class Calendar extends Component {
   changeDisplayType = () => {
     const displayType = this.state.displayType === 'list' ? 'gallery' : 'list';
     this.setState({ displayType });
+  }
+  onListFilterApply = (obj) => {
+    this.setState({
+      listData: this.filterList(this.state.data, obj)
+    });
+  }
+  onInitialSelect = (props) => {
+    const propsForSure = props ? props : this.props;
+    this.setState({
+      data: this.filterByDate(propsForSure.data, this.state.selectedWeek),
+      listData: this.filterByDate(propsForSure.data, this.state.selectedWeek),
+      events: this.convertData(propsForSure.data)
+    });
   }
   renderModal () {
     return <Modal show={this.state.showModal} onHide={this.close}>
@@ -159,7 +177,7 @@ class Calendar extends Component {
       <Main data={this.state.data} showModal={this.open}/>
     </div>
     : <div className="c-table list row">
-        <List data={this.state.data}/>
+        <List data={this.state.listData}/>
       </div>
   }
 
@@ -182,7 +200,7 @@ class Calendar extends Component {
               <i className="fa fa-download fa-fw"></i>
           </CSVLink>
           <ButtonGroup>
-            <Button onClick={this.changeDisplayType} disabled={displayType !== 'list'}><i className={`fa fa-filter fa-fw`}></i></Button>
+            <FilterButton displayType={displayType} data={this.state.data} onApply={this.onListFilterApply} onClear={this.onInitialSelect}/>
             <Button onClick={this.changeDisplayType}><i className={`fa ${DISPLAY_TYPES[displayType]} fa-fw`}></i></Button>
           </ButtonGroup>
         </div>
