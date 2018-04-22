@@ -44,7 +44,7 @@ router
     ctx.body = await getTeachers();
     ctx.status = 201;
   })
-  .get('/teachers/:id', async (ctx, next) => {
+  .get('/teacher/:id', async (ctx, next) => {
     ctx.status = 201;
     ctx.body = await getTeacher(ctx.params.id);
   })
@@ -56,7 +56,7 @@ router
     ctx.body = await updateTeachers();
     ctx.status = 201;
   })
-  .post('/teachers/:id', async (ctx, next) => {
+  .post('/teacher/:id', async (ctx, next) => {
     ctx.status = 201;
     ctx.body = await updateTeacherEvents(ctx.params.id);
   })
@@ -64,7 +64,7 @@ router
     ctx.status = 201;
     ctx.body = await getGroups();
   })
-  .get('/groups/:id', async (ctx, next) => {
+  .get('/group/:id', async (ctx, next) => {
     ctx.status = 201;
     ctx.body = await getGroup(ctx.params.id);
   })
@@ -76,7 +76,7 @@ router
     ctx.status = 201;
     ctx.body = await updateGroups();
   })
-  .post('/groups/:id', async (ctx, next) => {
+  .post('/group/:id', async (ctx, next) => {
     ctx.status = 201;
     ctx.body = await updateGroupEvents(ctx.params.id);
   })
@@ -84,7 +84,7 @@ router
     ctx.body = await getAuditories();
     ctx.status = 201;
   })
-  .get('/auditories/:id', async (ctx, next) => {
+  .get('/auditorie/:id', async (ctx, next) => {
     ctx.status = 201;
     ctx.body = await getAuditory(ctx.params.id);
   })
@@ -92,7 +92,7 @@ router
     ctx.body = await updateAuditories();
     ctx.status = 201;
   })
-  .post('/auditories/:id', async (ctx, next) => {
+  .post('/auditorie/:id', async (ctx, next) => {
     ctx.status = 201;
     ctx.body = await updateAuditoryEvents(ctx.params.id);
   })
@@ -100,9 +100,9 @@ router
     ctx.body = await findFreeAuditory(moment(ctx.request.body.date));
     ctx.status = 201;
   })
-  .get('/events/:id', async (ctx, next) => {
+  .get('/events/:target/:id', async (ctx, next) => {
     ctx.status = 201;
-    ctx.body = await getEvent(ctx.params.id);
+    ctx.body = await getEvent(ctx.params.id, ctx.params.target);
   })
 export function routes () { return router.routes() }
 export function allowedMethods () { return router.allowedMethods() }

@@ -81,7 +81,7 @@ class Teachers extends Component {
             />
           <FEtable
             data={this.state.search}
-            root={'teachers'}
+            root={'teacher'}
             history={this.props.history}/>
         </div>
       </div>

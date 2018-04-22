@@ -19,7 +19,7 @@ class Core {
     return res;
   }
   static removeLocal(prop) {
-      localStorage.removeItem(prop);
+    localStorage.removeItem(prop);
   }
 }
 

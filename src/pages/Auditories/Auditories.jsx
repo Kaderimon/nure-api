@@ -53,7 +53,7 @@ class Auditories extends Component {
         <div className="flex col-xs-12">
           <FEtable
             data={this.state.search}
-            root={'auditories'}
+            root={'auditorie'}
             history={this.props.history}/>
         </div>
         <div className="col-xs-offset-1 col-xs-10 page-header">

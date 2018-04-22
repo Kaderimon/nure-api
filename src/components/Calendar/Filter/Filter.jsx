@@ -9,24 +9,51 @@ import {
   FormControl
 } from "react-bootstrap";
 import _ from "lodash";
+import core from "../../../core/core";
 
 export default class FilterButton extends PureComponent {
   constructor(props) {
     super(props);
+    const subjects = _.uniqBy(props.data, "subject.id");
+    const types = _.uniqBy(props.data, "type.id");
+    const groups = _.uniqBy(_.flatten(props.data.map(el => el.groups)), "id");
     this.state = {
       visible: false,
-      subjectId: null,
-      typeId: null,
-      groupId: null
+      subjectId: subjects[0] ? subjects[0].subject.id : '',
+      typeId: '',
+      groupId: '',
+      subjects,
+      types,
+      groups
     };
   }
 
+  componentWillReceiveProps(props) {
+    const subjects = _.uniqBy(props.data, "subject.id");
+    const types = _.uniqBy(props.data, "type.id");
+    const groups = _.uniqBy(_.flatten(props.data.map(el => el.groups)), "id");
+    this.setState({
+      subjectId: subjects[0] ? subjects[0].subject.id : '',
+      typeId: '',
+      groupId: '',
+      subjects,
+      types,
+      groups
+    });
+  }
+
   onSubjectPick = (e) => {
-    this.setState({ subjectId: e.target.value });
+    this.setState({
+      subjectId: e.target.value,
+      typeId: this.state.types[0].type.id
+    });
   };
 
   onTypePick = (e) => {
-    this.setState({ typeId: e.target.value });
+    this.setState({
+      typeId: e.target.value,
+      groupId: this.state.groups[0].id
+    });
   };
 
   onGroupPick = (e) => {
@@ -35,7 +62,7 @@ export default class FilterButton extends PureComponent {
 
   onClear = () => {
     this.setState({
-      subjectId: null,
+      subjectId: this.state.subjects[0].subject.id,
       typeId: null,
       groupId: null
     });
@@ -54,16 +81,16 @@ export default class FilterButton extends PureComponent {
   triggerFilter = () => {
     this.setState({
       visible: !this.state.visible,
-      subjectId: null,
-      typeId: null,
-      groupId: null
+      subjectId: '',
+      typeId: '',
+      groupId: ''
     });
     this.props.onClear();
   };
 
   render() {
     const { displayType, data, onApply, onClear } = this.props;
-    const { visible, subjectId, typeId, groupId } = this.state;
+    const { visible, subjectId, typeId, groupId, subjects, types, groups } = this.state;
     const isFilterEnabled = displayType !== "list";
     return (
       <div
@@ -83,7 +110,7 @@ export default class FilterButton extends PureComponent {
                 placeholder="select"
                 onChange={this.onSubjectPick}
               >
-                {_.uniqBy(data, "subject.id").map((el, i) => (
+                {subjects.map((el, i) => (
                   <option key={`sub${i}`} value={el.subject.id}>
                     {el.subject.brief}
                   </option>
@@ -98,9 +125,12 @@ export default class FilterButton extends PureComponent {
                 componentClass="select"
                 placeholder="select"
                 onChange={this.onTypePick}
-                disabled={_.isNull(subjectId)}
+                defaultValue={null}
+                disabled={core.empty(subjectId)}
+                value={typeId}
               >
-                {_.uniqBy(data, "type.id").map((el, i) => (
+                <option key={`typeempty`} value={''}></option>
+                {types.map((el, i) => (
                   <option key={`type${i}`} value={el.type.id}>
                     {el.type.short_name}
                   </option>
@@ -115,11 +145,13 @@ export default class FilterButton extends PureComponent {
                 componentClass="select"
                 placeholder="select"
                 onChange={this.onGroupPick}
-                disabled={_.isNull(subjectId) && _.isNull(typeId)}
+                disabled={core.empty(typeId)}
+                value={groupId}
               >
-                {_.uniqBy(_.flatten(data.map(el => el.groups)), "id").map(
+                <option key={`groupempty`} value={''}></option>
+                {groups.map(
                   (el, i) => (
-                    <option key={`type${i}`} value={el.id}>
+                    <option key={`group${i}`} value={el.id}>
                       {el.name}
                     </option>
                   )

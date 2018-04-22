@@ -81,7 +81,7 @@ class Groups extends Component {
             />
           <FEtable
             data={this.state.search}
-            root={'groups'}
+            root={'group'}
             history={this.props.history}/>
         </div>
       </div>

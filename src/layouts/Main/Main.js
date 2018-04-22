@@ -43,9 +43,9 @@ class Main extends Component {
               <Route exact path="/groups" component={(props) => <Groups {...props} faculties={this.state.faculties}/>}/>
               <Route exact path="/teachers" component={(props) => <Teachers {...props} faculties={this.state.faculties}/>}/>
               <Route exact path="/auditories" component={Auditories}/>
-              <Route exact path="/auditories/:id" component={Events}/>
-              <Route exact path="/groups/:id" component={Events}/>
-              <Route exact path="/teachers/:id" component={Events}/>
+              <Route exact path="/auditorie/:id" component={Events}/>
+              <Route exact path="/group/:id" component={Events}/>
+              <Route exact path="/teacher/:id" component={Events}/>
               <Route component={NotFound}/>
           </Switch>
         </div>

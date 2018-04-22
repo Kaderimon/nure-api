@@ -15,31 +15,28 @@ class Events extends Component {
     }
   }
   componentDidMount() {
-    const name = _.get(core.getLocal('event'),'name','');
-    if(!name) {
-      this.props.history.push('/404');
-      return;
-    };
+    const name = _.get(core.getLocal('event'),'name','') || 'Неизвестно';
     this.setState({name});
-    this.fetchEvents();
+    const [uri, target] = this.props.location.pathname.split('/');
+    this.fetchInfo(target);
+    this.fetchEvents(target);
   }
-  async fetchEvents () {
-    const response = await Transport.get(`${config.apis.events}${this.props.match.params.id}`);
+  async fetchEvents (target) {
+    const response = await Transport.get(`${config.apis.events}${target}/${this.props.match.params.id}`);
     const sync = _.get(response, 'sync', 'Неизвестно')
     this.setState({
       data: _.get(response, 'events', []),
       sync
     });
   }
-  async fetchInfo () {
-    const path = this.props.location.pathname.split('/')[1];
+  async fetchInfo (target) {
     const id = this.props.match.params.id;
-    core.saveLocal('event', { id: id, type:path }, true);
+    core.saveLocal('event', { id: id, type:target }, true);
     try {
-      const response = await Transport.get(`/api/${path}/${this.props.match.params.id}`);
+      const response = await Transport.get(`/api/${target}/${this.props.match.params.id}`);
       this.setState({name: response.short_name || response.name});
     } catch (e) {
-      console.log(e);
+      this.props.history.push('/404');
     }
   }
   render () {

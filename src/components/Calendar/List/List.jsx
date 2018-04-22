@@ -5,7 +5,7 @@ import { Col } from "react-bootstrap";
 
 class List extends Component {
   renderLessons() {
-    return this.props.data.map((event, i) => {
+    return this.props.data ? this.props.data.map((event, i) => {
       const { end_time, start_time, groups = [], auditory, type, subject } = event;
       return (
         <p key={`eventListItem${i}`}>
@@ -17,7 +17,7 @@ class List extends Component {
             .join(" & ")}`}
         </p>
       );
-    });
+    }) : <p>Ничего не найдено</p>
   }
   render() {
     return (

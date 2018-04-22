@@ -44,16 +44,20 @@ class FEtable extends Component {
 
   renderGroups () {
     const length = _.get(this.state, 'data.length', 0);
-    const { currentPage, perPage } = this.state;
+    const { currentPage, perPage, root } = this.state;
     const quickMath = currentPage*perPage;
     if (length > 0) {
       return this.state.data.slice(quickMath, quickMath+perPage).map( (val, i) => {
         const onNav = e => {
           e.preventDefault();
-          core.saveLocal('event', {id:val.id, name: val.short_name || val.name, type: this.state.root}, true);
-          this.props.history.push(`/${this.state.root}/${val.id}`);
+          core.saveLocal('event', {id:val.id, name: val.short_name || val.name, type: root}, true);
+          const history = core.getLocal('history');
+          history.push({id:val.id, name: val.short_name || val.name, type: root});
+          const uniqueHistory = _.uniqWith(history, _.isEqual);
+          core.saveLocal('history', uniqueHistory.length > 10 ? uniqueHistory.splice(-10,10) : uniqueHistory, true);
+          this.props.history.push(`/${root}/${val.id}`);
         };
-        return <NavLink key={`item${i}`} onClick={onNav} to={`/${this.state.root}/${val.id}`}>
+        return <NavLink key={`item${i}`} onClick={onNav} to={`/${root}/${val.id}`}>
             <Item data={val}/>
           </NavLink>
       })
@@ -71,17 +75,19 @@ class FEtable extends Component {
             {this.props.isDataRequested ? this.renderSpinner() : this.renderGroups()}
           </div>
           <div className="pagination-container">
-            <ReactPaginate previousLabel={<i className="fa fa-arrow-left pointer"></i>}
-                          nextLabel={<i className="fa fa-arrow-right pointer"></i>}
-                          breakLabel={<a href=""><i className="fa fa-ellipsis-h" aria-hidden="true"></i></a>}
-                          breakClassName={"break-me"}
-                          pageCount={this.state.pageCount}
-                          marginPagesDisplayed={2}
-                          pageRangeDisplayed={3}
-                          onPageChange={this.handlePageChange}
-                          containerClassName={"pagination"}
-                          subContainerClassName={"pages pagination"}
-                          activeClassName={"active"} />
+            <ReactPaginate 
+              previousLabel={<i className="fa fa-arrow-left pointer"></i>}
+              nextLabel={<i className="fa fa-arrow-right pointer"></i>}
+              breakLabel={<a href=""><i className="fa fa-ellipsis-h" aria-hidden="true"></i></a>}
+              breakClassName={"break-me"}
+              pageCount={this.state.pageCount}
+              marginPagesDisplayed={2}
+              pageRangeDisplayed={3}
+              onPageChange={this.handlePageChange}
+              containerClassName={"pagination"}
+              subContainerClassName={"pages pagination"}
+              activeClassName={"active"}
+            />
             <PerPagePicker onPerPageChange={this.handlePerPageChange}/>
           </div>
         </div>
