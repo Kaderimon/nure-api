@@ -8,6 +8,7 @@ export const config = {
         auditories: `${server}/api/auditories`,
         findFreeAuditory: `${server}/api/findFreeAuditory`,
         events: `${server}/api/events/`,
-        updater: `${server}/api/`
+        updater: `${server}/api/`,
+        findFreeTime: `${server}/api/crossEvents?`
     }
 }

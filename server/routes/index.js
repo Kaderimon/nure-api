@@ -22,6 +22,7 @@ import { updateDB,
   updateAuditoryEvents,
   findFreeAuditory} from '../controllers/index.js'
 import moment from 'moment';
+import { crossEvents } from '../services/crossEvents.js';
   
 const router = new Router({
   prefix: '/api'
@@ -103,6 +104,10 @@ router
   .get('/events/:target/:id', async (ctx, next) => {
     ctx.status = 201;
     ctx.body = await getEvent(ctx.params.id, ctx.params.target);
+  })
+  .get('/crossEvents', async (ctx, next) => {
+    ctx.status = 201;
+    ctx.body = await crossEvents(ctx.query);
   })
 export function routes () { return router.routes() }
 export function allowedMethods () { return router.allowedMethods() }

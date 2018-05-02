@@ -8,6 +8,7 @@ import Groups from '../../pages/Groups/Groups';
 import Teachers from '../../pages/Teachers/Teachers';
 import Events from '../../pages/Events/Events';
 import Auditories from '../../pages/Auditories/Auditories';
+import Service from '../../pages/Service/Service';
 import NotFound from '../../pages/NotFound/404';
 import { config } from '../../config/config.js';
 
@@ -46,6 +47,7 @@ class Main extends Component {
               <Route exact path="/auditorie/:id" component={Events}/>
               <Route exact path="/group/:id" component={Events}/>
               <Route exact path="/teacher/:id" component={Events}/>
+              <Route exact path="/search" component={Service}/>
               <Route component={NotFound}/>
           </Switch>
         </div>

@@ -30,8 +30,32 @@ class Main extends Component {
       </Col>
     })
   }
+  renderEmptyLessons(data, pair) {
+    return daysOfWeek.map((day,dayNumber) => {
+      let lessonColorToSet = "";
+      let modalData = null;
+      const lessons = data.map(lesson => {
+        const lessonDay = moment(lesson.start_time).day();
+        if ( lessonDay === dayNumber+1 && lesson.number_pair === pair+1 ) {
+          lessonColorToSet = lesson ? "red" : "default";
+          modalData = { ...lesson }
+          return <div>
+            {_.get(lesson, "subject.brief", "???")}
+            <div style={{fontSize: "smaller", marginTop:"5px"}}>
+              <span>{_.get(lesson, "type.short_name", "???")} </span>
+              <span>{_.get(lesson, "auditory", "???")}</span>
+            </div>
+          </div>
+        }
+      })
+      const showModal = modalData ? this.props.showModal(modalData) : ()=>{};
+      return <Col xs={1} className="lesson" style={{backgroundColor: lessonColorToSet}} onClick={showModal}>
+        {lessons}
+      </Col>
+    })
+  }
   render () {
-    const { data } = this.props
+    const { data, noInfo } = this.props
     return (
       <Col xs={12}>
         { workHours.map( (time, i) => 
@@ -39,7 +63,7 @@ class Main extends Component {
             <Col xs={1} className="timeRange lesson">
               {time.map(range => <div>{range}</div>)}
             </Col>
-            {this.renderLessons(data, i)}
+            {noInfo ? this.renderEmptyLessons(data, i) : this.renderLessons(data, i)}
           </Col>
         )}
       </Col>

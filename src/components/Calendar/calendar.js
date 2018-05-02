@@ -68,7 +68,7 @@ class Calendar extends Component {
     });
   }
   calculateWeekRange = (currentWeek) => `[${moment().week(currentWeek).day(1).format('D MMMM')} ... ${moment().week(currentWeek).day(7).format('D MMMM')}]`;
-  filterByDate = (events, currentWeek) => {
+  filterByDate = (events = [], currentWeek) => {
     return events.filter(event => {
       const time = moment(event.start_time);
       const selectedWeek = moment().week(currentWeek)
@@ -174,7 +174,7 @@ class Calendar extends Component {
       <div className="col-xs-12">
         <Header week={moment().week(this.state.selectedWeek)}/>
       </div>
-      <Main data={this.state.data} showModal={this.open}/>
+      <Main data={this.state.data} showModal={this.open} noInfo={this.props.noInfo}/>
     </div>
     : <div className="c-table list row">
         <List data={this.state.listData}/>
@@ -183,8 +183,9 @@ class Calendar extends Component {
 
   render () {
     const {selectedWeek, displayType, weekRange, data} = this.state;
+    const { customClass } = this.props;
     return (
-      <div className="col-xs-offset-1 col-xs-10 calendar information-block">
+      <div className={`col-xs-offset-1 col-xs-10 calendar information-block ${customClass}`}>
         {this.renderModal()}
         <div className="c-control">
           <ButtonGroup>

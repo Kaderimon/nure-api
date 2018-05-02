@@ -51,7 +51,7 @@ class FEtable extends Component {
         const onNav = e => {
           e.preventDefault();
           core.saveLocal('event', {id:val.id, name: val.short_name || val.name, type: root}, true);
-          const history = core.getLocal('history');
+          const history = core.getLocal('history') || [];
           history.push({id:val.id, name: val.short_name || val.name, type: root});
           const uniqueHistory = _.uniqWith(history, _.isEqual);
           core.saveLocal('history', uniqueHistory.length > 10 ? uniqueHistory.splice(-10,10) : uniqueHistory, true);

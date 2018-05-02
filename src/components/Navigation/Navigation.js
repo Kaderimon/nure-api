@@ -18,6 +18,10 @@ class Nav extends Component {
           <i className="fa fa-slideshare"></i>
           Аудитории
         </NavLink>
+        <NavLink to='/search'>
+          <i className="fa fa-slideshare"></i>
+          Поиск
+        </NavLink>
       </nav>
     );
   }
